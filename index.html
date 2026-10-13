@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Notes Board</title>
+  <meta name="description" content="Realistic bulletin board with colorful sticky notes and local storage persistence.">
+  <!-- Google Fonts: Kalam for handwriting sticky notes & Outfit for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fullscreen Cork Bulletin Board Container -->
+  <div class="wooden-wall">
+    <div class="cork-board" id="cork-board">
+      
+      <!-- Sleek Floating Control Bar (Can be minimized to just see notes) -->
+      <header class="floating-toolbar" id="toolbar" aria-label="Notes Toolbar">
+        <div class="toolbar-left">
+          <span class="board-badge">📌 Sticky Notes</span>
+          <span class="note-count-badge" id="note-count-badge">0 notes</span>
+        </div>
+
+        <!-- Prompt 1: Text input and Add button -->
+        <div class="toolbar-center">
+          <div class="input-container">
+            <input 
+              type="text" 
+              id="note-input" 
+              placeholder="Write a sticky note and press Enter..." 
+              maxlength="240"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Color selection dots -->
+          <div class="color-palette" title="Select color">
+            <button type="button" class="swatch active" data-color="yellow" style="--c: #fff59d;" title="Yellow"></button>
+            <button type="button" class="swatch" data-color="pink" style="--c: #ffab91;" title="Pink"></button>
+            <button type="button" class="swatch" data-color="blue" style="--c: #b3e5fc;" title="Blue"></button>
+            <button type="button" class="swatch" data-color="green" style="--c: #c8e6c9;" title="Green"></button>
+            <button type="button" class="swatch" data-color="purple" style="--c: #e1bee7;" title="Purple"></button>
+            <button type="button" class="swatch" data-color="orange" style="--c: #ffe082;" title="Orange"></button>
+          </div>
+
+          <button id="add-btn" class="add-btn" type="button" title="Add note to board">
+            <span>＋ Add</span>
+          </button>
+        </div>
+
+        <div class="toolbar-right">
+          <!-- Quick toggle to hide toolbar for 100% pure sticky notes view -->
+          <button id="toggle-view-btn" class="view-toggle-btn" type="button" title="Toggle Clean View (Just Notes)">
+            <span id="view-icon">👁️</span> <span class="btn-text">Just Notes</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Prompt 1: Grid layout to display notes as colorful squares -->
+      <main class="board-canvas">
+        <div class="notes-grid" id="notes-grid">
+          <!-- Sticky notes injected here by JavaScript on page open -->
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
