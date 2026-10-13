@@ -1,16 +1,17 @@
 /* ==========================================================================
-   Sticky Notes Board - Sky & Web Net Theme with Persian RTL & Notebooks
+   Sticky Notes Board - Sky & Web Net Theme with Bootstrap 5 & Persian RTL
    ========================================================================== */
 
 :root {
   /* Fonts */
   --font-persian: 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
-  --font-ui: 'Outfit', 'Vazirmatn', sans-serif;
+  --font-ui: 'Outfit', 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-note-en: 'Kalam', cursive, sans-serif;
   --font-note-fa: 'Vazirmatn', sans-serif;
 
-  /* Sky Palette */
+  /* Sky Color Palette */
   --sky-deep: #034f84;
+  --sky-dark: #0369a1;
   --sky-primary: #0284c7;
   --sky-vibrant: #0ea5e9;
   --sky-light: #38bdf8;
@@ -29,44 +30,37 @@
   --note-yellow-bg: #fff9a6;
   --note-yellow-border: #facc15;
   --note-yellow-text: #372f05;
-  --note-yellow-pin: #eab308;
 
   --note-pink-bg: #ffd1dc;
   --note-pink-border: #f472b6;
   --note-pink-text: #4c0519;
-  --note-pink-pin: #ec4899;
 
   --note-blue-bg: #cbf3fd;
   --note-blue-border: #38bdf8;
   --note-blue-text: #082f49;
-  --note-blue-pin: #0284c7;
 
   --note-green-bg: #d1fae5;
   --note-green-border: #34d399;
   --note-green-text: #064e3b;
-  --note-green-pin: #10b981;
 
   --note-purple-bg: #ede9fe;
   --note-purple-border: #a78bfa;
   --note-purple-text: #3b0764;
-  --note-purple-pin: #8b5cf6;
 
   --note-orange-bg: #ffedd5;
   --note-orange-border: #fb923c;
   --note-orange-text: #431407;
-  --note-orange-pin: #f97316;
 
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-shadow: 0 16px 36px rgba(2, 79, 132, 0.18);
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 16px 36px rgba(2, 79, 132, 0.16);
   --glass-blur: blur(18px);
 }
 
+/* Base Body & Reset */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
@@ -76,10 +70,10 @@ body {
   background-color: var(--sky-primary);
   overflow-x: hidden;
   position: relative;
-  transition: direction 0.3s ease;
+  line-height: 1.6;
 }
 
-/* RTL / LTR Typography */
+/* Direction-specific font bindings */
 html[dir="rtl"] body {
   font-family: var(--font-persian);
   direction: rtl;
@@ -90,8 +84,25 @@ html[dir="ltr"] body {
   direction: ltr;
 }
 
+/* Sky Color Utilities */
+.text-sky-dark {
+  color: var(--sky-deep) !important;
+}
+
+.bg-sky-subtle {
+  background-color: rgba(2, 132, 199, 0.12) !important;
+}
+
+.border-sky {
+  border-color: rgba(2, 132, 199, 0.28) !important;
+}
+
+.bg-sky-pill {
+  background-color: var(--sky-primary) !important;
+}
+
 /* ==========================================================================
-   Sky Atmosphere & Web Net Geometry Background
+   Sky Atmosphere & Web Net Geometric Background
    ========================================================================== */
 
 .sky-container {
@@ -117,14 +128,13 @@ html[dir="ltr"] body {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  /* Radiant geometric net/web with nodes */
   background-image: 
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 1.5px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.32) 1.5px, transparent 2px),
     linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.22) 0%, transparent 60%);
-  background-size: 36px 36px, 36px 36px, 36px 36px, 100% 100%;
-  opacity: 0.85;
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.24) 0%, transparent 60%);
+  background-size: 38px 38px, 38px 38px, 38px 38px, 100% 100%;
+  opacity: 0.88;
 }
 
 /* Soft Cloud Sunlight Glow */
@@ -135,44 +145,43 @@ html[dir="ltr"] body {
   z-index: 2;
   background: 
     radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.45) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(224, 242, 254, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(224, 242, 254, 0.55) 0%, transparent 50%),
     radial-gradient(circle at 50% 85%, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
-  animation: cloudsFloat 25s ease-in-out infinite alternate;
+  animation: cloudsFloat 28s ease-in-out infinite alternate;
 }
 
 @keyframes cloudsFloat {
   0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-12px) scale(1.03); }
-  100% { transform: translateY(6px) scale(0.98); }
+  50% { transform: translateY(-14px) scale(1.03); }
+  100% { transform: translateY(8px) scale(0.98); }
 }
 
-/* Main Board Outer Wrapper */
+/* Board Outer Wrapper */
 .board-frame {
   position: relative;
   z-index: 10;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 16px 24px;
 }
 
 /* ==========================================================================
-   Header Toolbar (Floating Frosted Sky Glass)
+   Floating Frosted Glass Toolbar
    ========================================================================== */
 
 .floating-toolbar {
   position: sticky;
   top: 14px;
   z-index: 100;
-  margin: 0 auto 14px;
+  margin: 0 auto 12px;
   width: 100%;
-  max-width: 1280px;
-  background: rgba(255, 255, 255, 0.72);
+  max-width: 1320px;
+  background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border: 1.5px solid var(--glass-border);
   border-radius: 40px;
-  padding: 10px 20px;
+  padding: 10px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -185,7 +194,7 @@ html[dir="ltr"] body {
 
 .floating-toolbar.minimized {
   transform: translateY(-88%);
-  opacity: 0.15;
+  opacity: 0.18;
 }
 
 .floating-toolbar.minimized:hover {
@@ -193,128 +202,128 @@ html[dir="ltr"] body {
   opacity: 1;
 }
 
-/* Toolbar Brand */
-.toolbar-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
+/* Brand badge */
+.brand-badge .brand-icon {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));
 }
 
-.brand-badge {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.brand-icon {
-  font-size: 1.3rem;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-}
-
-.brand-title {
-  font-weight: 800;
-  font-size: 1.12rem;
-  color: #034f84;
+.brand-badge .brand-title {
   letter-spacing: -0.02em;
 }
 
-.note-count-badge {
-  background: rgba(2, 132, 199, 0.14);
-  border: 1px solid rgba(2, 132, 199, 0.35);
-  color: #0369a1;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 9999px;
-}
-
-/* Toolbar Center - Inputs */
-.toolbar-center {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  max-width: 780px;
-}
-
-.input-container {
-  flex: 1;
-  min-width: 170px;
-}
-
-#note-input {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1.5px solid rgba(2, 132, 199, 0.22);
-  border-radius: 24px;
-  padding: 9px 18px;
+/* Sky Input & Controls */
+.sky-input {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1.5px solid rgba(2, 132, 199, 0.25) !important;
   font-family: inherit;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   color: #0f172a;
-  outline: none;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  padding: 8px 18px;
   transition: all 0.2s ease;
 }
 
-#note-input::placeholder {
-  color: #64748b;
-  font-size: 0.88rem;
+.sky-input:focus {
+  border-color: var(--sky-primary) !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3.5px rgba(14, 165, 233, 0.25) !important;
 }
 
-#note-input:focus {
-  border-color: var(--sky-primary);
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25);
-}
-
-/* Notebook Select Dropdown in Toolbar */
-.notebook-select-wrapper {
-  position: relative;
-}
-
-.notebook-dropdown {
-  appearance: none;
-  -webkit-appearance: none;
-  background: rgba(255, 255, 255, 0.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230284c7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat;
-  background-position: left 12px center;
-  padding: 8px 14px 8px 30px;
-  border: 1.5px solid rgba(2, 132, 199, 0.25);
-  border-radius: 22px;
-  font-family: inherit;
-  font-size: 0.85rem;
+/* Dropdown Selector */
+.sky-select {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border: 1.5px solid rgba(2, 132, 199, 0.25) !important;
+  color: var(--sky-dark) !important;
   font-weight: 700;
-  color: #0369a1;
+  font-size: 0.86rem;
+  padding: 8px 16px;
   cursor: pointer;
-  outline: none;
   transition: all 0.2s ease;
-  white-space: nowrap;
 }
 
-html[dir="rtl"] .notebook-dropdown {
-  background-position: left 12px center;
-  padding: 8px 14px 8px 32px;
+.sky-select:focus {
+  border-color: var(--sky-primary) !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2) !important;
 }
 
-html[dir="ltr"] .notebook-dropdown {
-  background-position: right 12px center;
-  padding: 8px 32px 8px 14px;
+/* Buttons */
+.btn-sky {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
 }
 
-.notebook-dropdown:hover,
-.notebook-dropdown:focus {
+.btn-sky:hover {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45) !important;
+}
+
+.btn-outline-sky {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1.5px solid rgba(2, 132, 199, 0.24) !important;
+  color: var(--sky-dark) !important;
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-sky:hover {
+  background: #ffffff !important;
+  color: var(--sky-primary) !important;
+  border-color: var(--sky-primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.16) !important;
+}
+
+/* Live Search Box */
+.search-box-wrapper {
+  min-width: 130px;
+  max-width: 180px;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid rgba(2, 132, 199, 0.2);
+  padding-left: 28px;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+html[dir="rtl"] .search-input {
+  padding-left: 12px;
+  padding-right: 28px;
+}
+
+.search-input:focus {
+  background: #ffffff;
   border-color: var(--sky-primary);
-  background-color: #ffffff;
   box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
+  min-width: 180px;
 }
 
-/* Color Palette Swatches */
-.color-palette {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--sky-primary);
+  font-size: 0.8rem;
+  pointer-events: none;
 }
 
+html[dir="ltr"] .search-icon {
+  left: 10px;
+}
+
+html[dir="rtl"] .search-icon {
+  right: 10px;
+}
+
+/* Color Swatches */
 .swatch {
   width: 22px;
   height: 22px;
@@ -336,143 +345,42 @@ html[dir="ltr"] .notebook-dropdown {
   box-shadow: 0 0 0 2.5px rgba(2, 132, 199, 0.45);
 }
 
-/* Add Note Button */
-.add-btn {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-  color: #ffffff;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 0.88rem;
-  border: none;
-  border-radius: 22px;
-  padding: 8px 18px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
-  transition: all 0.2s ease;
-}
-
-.add-btn:hover {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.48);
-}
-
-/* Toolbar Right Buttons */
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.toolbar-action-btn {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1.5px solid rgba(2, 132, 199, 0.2);
-  color: #0369a1;
-  font-family: inherit;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 7px 13px;
-  border-radius: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-}
-
-.toolbar-action-btn:hover {
-  background: #ffffff;
-  color: #0284c7;
-  border-color: var(--sky-primary);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
-}
-
-.lang-btn {
-  background: linear-gradient(135deg, rgba(224, 242, 254, 0.85) 0%, rgba(255, 255, 255, 0.95) 100%);
-}
-
 /* ==========================================================================
    Notebook Tabs Filter Navigation Bar
    ========================================================================== */
 
 .notebook-tabs-bar {
-  max-width: 1280px;
+  max-width: 1320px;
   width: 100%;
-  margin: 0 auto 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 26px;
-  box-shadow: 0 6px 20px rgba(2, 79, 132, 0.08);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
-.tabs-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.tab-btn {
+.notebook-tabs-bar .nav-pills .nav-link {
+  color: var(--sky-deep);
   background: transparent;
-  border: none;
-  font-family: inherit;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  color: #075985;
-  padding: 7px 15px;
-  border-radius: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 7px;
   transition: all 0.2s ease;
 }
 
-.tab-btn:hover {
-  background: rgba(255, 255, 255, 0.6);
+.notebook-tabs-bar .nav-pills .nav-link:hover {
+  background: rgba(255, 255, 255, 0.65);
   color: #034f84;
 }
 
-.tab-btn.active {
+.notebook-tabs-bar .nav-pills .nav-link.active {
   background: #ffffff;
-  color: #0284c7;
+  color: var(--sky-primary);
   box-shadow: 0 3px 12px rgba(2, 132, 199, 0.22);
 }
 
-.tab-count {
-  background: rgba(2, 132, 199, 0.12);
-  color: #0284c7;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 1px 7px;
-  border-radius: 12px;
-}
-
-.tab-btn.active .tab-count {
-  background: var(--sky-primary);
-  color: #ffffff;
-}
-
-.active-filter-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #0369a1;
-  padding-inline: 8px;
+.notebook-tabs-bar .nav-link.active .badge {
+  background-color: var(--sky-primary) !important;
+  color: #ffffff !important;
 }
 
 .indicator-dot {
@@ -489,15 +397,15 @@ html[dir="ltr"] .notebook-dropdown {
 
 .board-canvas {
   flex: 1;
-  max-width: 1280px;
+  max-width: 1320px;
   width: 100%;
   margin: 0 auto;
-  padding: 10px 0 60px;
+  padding: 10px 0 50px;
 }
 
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2.2rem 1.8rem;
   align-items: start;
 }
@@ -505,7 +413,7 @@ html[dir="ltr"] .notebook-dropdown {
 /* Sticky Note Square Card */
 .sticky-note {
   position: relative;
-  min-height: 245px;
+  min-height: 250px;
   padding: 2.3rem 1.25rem 1rem;
   border-radius: 3px 3px 16px 3px;
   display: flex;
@@ -548,7 +456,7 @@ html[dir="rtl"] .sticky-note::after {
   z-index: 35;
 }
 
-/* Realistic 3D Push-Pin with Sky Pearl Polish */
+/* 3D Push-Pin with Sky Pearl Polish */
 .sticky-pin {
   position: absolute;
   top: -11px;
@@ -767,20 +675,14 @@ html[dir="rtl"] .finished-stamp {
    ========================================================================== */
 
 .empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(12px);
-  border-radius: 28px;
-  border: 1.5px dashed rgba(255, 255, 255, 0.7);
-  max-width: 500px;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(14px);
+  border: 1.5px dashed rgba(255, 255, 255, 0.8);
+  max-width: 520px;
   margin: 30px auto;
-  box-shadow: 0 10px 30px rgba(2, 79, 132, 0.1);
 }
 
 .empty-icon {
-  font-size: 3rem;
-  margin-bottom: 12px;
   animation: floatCloud 3s ease-in-out infinite alternate;
 }
 
@@ -789,192 +691,34 @@ html[dir="rtl"] .finished-stamp {
   100% { transform: translateY(-8px); }
 }
 
-.empty-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #034f84;
-  margin-bottom: 6px;
-}
-
-.empty-desc {
-  font-size: 0.92rem;
-  color: #075985;
-}
-
-.hidden {
-  display: none !important;
-}
-
 /* ==========================================================================
-   Notebook Selection Modal (Finish button trigger)
+   Bootstrap Modal & Choice Items Styling
    ========================================================================== */
 
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(3, 40, 68, 0.48);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  animation: fadeIn 0.2s ease-out;
-}
-
-.modal-card {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  border-radius: 28px;
-  width: 100%;
-  max-width: 480px;
-  padding: 24px 24px 20px;
-  box-shadow: 
-    0 20px 50px rgba(2, 60, 105, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.8);
-  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes scaleUp {
-  from { opacity: 0; transform: scale(0.92) translateY(12px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.modal-title-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.modal-icon {
-  font-size: 1.4rem;
-}
-
-.modal-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #034f84;
-}
-
-.modal-close-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.4rem;
-  color: #64748b;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.modal-desc {
-  font-size: 0.88rem;
-  color: #475569;
-  margin-bottom: 16px;
-}
-
-.notebook-choice-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 18px;
+.sky-modal-content {
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .choice-item {
   background: #f8fafc;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  cursor: pointer;
-  text-align: inherit;
-  font-family: inherit;
+  border-color: #e2e8f0;
   transition: all 0.2s ease;
-  position: relative;
 }
 
 .choice-item:hover {
-  background: #f0f9ff;
-  border-color: #38bdf8;
+  background: #f0f9ff !important;
+  border-color: var(--sky-primary) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
 }
 
-.choice-icon {
-  font-size: 1.6rem;
-}
-
-.choice-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.choice-name {
-  font-size: 0.95rem;
-  color: #0f172a;
-}
-
-.choice-hint {
-  font-size: 0.78rem;
-  color: #64748b;
-  margin-top: 2px;
-}
-
-.choice-badge {
-  background: #dcfce7;
-  color: #15803d;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 10px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.btn-cancel {
-  background: transparent;
-  border: 1.5px solid #cbd5e1;
-  color: #64748b;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 0.84rem;
-  padding: 7px 16px;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-cancel:hover {
-  background: #f1f5f9;
-  color: #334155;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+/* Toast Styling */
+.sky-toast {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(2, 132, 199, 0.2);
 }
 
 /* ==========================================================================
@@ -982,9 +726,6 @@ html[dir="rtl"] .finished-stamp {
    ========================================================================== */
 
 @media (max-width: 992px) {
-  .board-frame {
-    padding: 12px 14px;
-  }
   .floating-toolbar {
     flex-wrap: wrap;
     border-radius: 28px;
@@ -993,22 +734,10 @@ html[dir="rtl"] .finished-stamp {
   .toolbar-center {
     order: 3;
     width: 100%;
-    max-width: 100%;
     flex-wrap: wrap;
   }
-  .input-container {
-    min-width: 100%;
-  }
-  .notebook-tabs-bar {
-    flex-direction: column;
-    align-items: stretch;
-    border-radius: 20px;
-  }
-  .tabs-container {
-    justify-content: center;
-  }
-  .active-filter-indicator {
-    justify-content: center;
+  .search-box-wrapper {
+    max-width: 140px;
   }
 }
 
@@ -1017,7 +746,7 @@ html[dir="rtl"] .finished-stamp {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  .toolbar-left .brand-title {
-    font-size: 0.98rem;
+  .search-box-wrapper {
+    display: none;
   }
 }

@@ -1,55 +1,112 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" data-bs-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>یادداشت‌های چسبان | Sticky Notes Board</title>
-  <meta name="description" content="تابلوی یادداشت‌های چسبان واقع‌گرایانه با تم آسمان و تور تار عنکبوتی، پشتیبانی از زبان فارسی و دسته‌بندی یادداشت‌ها.">
-  <!-- Google Fonts: Vazirmatn for Persian, Kalam for handwritten English, Outfit for modern UI -->
+  
+  <!-- SEO Meta Tags -->
+  <title>یادداشت‌های چسبان | Sticky Notes Board - برنامه مدیریت کارها و یادداشت</title>
+  <meta name="description" content="برنامه تابلوی یادداشت‌های چسبان آنلاین با تم زیبای آسمان و تور، پشتیبانی کامل از زبان فارسی و انگلیسی، دسته‌بندی در دفترچه‌های کارهای من (To do it)، یادآوری‌ها (Remember) و تاریخچه (History) با ذخیره‌سازی خودکار.">
+  <meta name="keywords" content="یادداشت چسبان, sticky notes, دفترچه یادداشت, مدیریت کارها, to do list, یادآوری, فارسی, bootstrap 5">
+  <meta name="author" content="Zahra">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0284c7">
+  <link rel="canonical" href="http://localhost:8080/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://localhost:8080/">
+  <meta property="og:title" content="یادداشت‌های چسبان | Sticky Notes Board">
+  <meta property="og:description" content="برنامه واقع‌گرایانه و مدرن یادداشت‌های چسبان با تم آسمان و مدیریت پیشرفته کارها و دفترچه‌ها">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Sticky Notes Board">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="یادداشت‌های چسبان | Sticky Notes Board">
+  <meta name="twitter:description" content="یادداشت‌های چسبان مدرن با بوت‌استرپ ۵، زبان فارسی و تم آسمان">
+
+  <!-- Schema.org JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Sticky Notes Board",
+    "alternateName": "تابلوی یادداشت‌های چسبان",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "All",
+    "inLanguage": ["fa", "en"],
+    "description": "Realistic bulletin board with sticky notes, Sky & Web Net theme, notebooks categorization (To do, Remember, History), and Persian language support.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Vazirmatn for Persian, Kalam for handwritten English, Outfit for UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Kalam:wght@400;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS (RTL for Persian, switches to LTR for English) -->
+  <link id="bootstrap-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+  
+  <!-- Bootstrap Icons 1.11.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Styles (Sky & Web Net Aesthetic) -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Hidden SEO H1 for Semantic Document Outline -->
+  <h1 class="visually-hidden" id="seo-main-heading">تابلوی یادداشت‌های چسبان - برنامه مدیریت یادداشت، کارهای روزانه و تاریخچه</h1>
+
   <!-- Fullscreen Sky Atmosphere with Geometric Web Net Background -->
   <div class="sky-container">
     
     <!-- Animated Web Net Overlay & Cloud Layers -->
-    <div class="sky-web-net"></div>
-    <div class="sky-clouds-glow"></div>
+    <div class="sky-web-net" aria-hidden="true"></div>
+    <div class="sky-clouds-glow" aria-hidden="true"></div>
 
-    <!-- Main Board Frame -->
-    <div class="board-frame">
+    <!-- Main Container -->
+    <div class="container-fluid px-3 px-md-4 py-3 board-frame">
       
-      <!-- Sleek Floating Control Toolbar -->
-      <header class="floating-toolbar" id="toolbar" aria-label="Notes Toolbar">
+      <!-- Sleek Floating Control Toolbar (Bootstrap & Glassmorphism) -->
+      <header class="floating-toolbar shadow-lg" id="toolbar" aria-label="Notes Toolbar">
         
-        <div class="toolbar-left">
-          <div class="brand-badge">
-            <span class="brand-icon">📌</span>
-            <span class="brand-title" data-i18n="boardTitle">یادداشت‌های چسبان</span>
+        <!-- Left: Brand & Count -->
+        <div class="toolbar-left d-flex align-items-center gap-2">
+          <div class="brand-badge d-flex align-items-center gap-2">
+            <span class="brand-icon fs-4">📌</span>
+            <span class="brand-title fw-bold fs-5 text-sky-dark" data-i18n="boardTitle">یادداشت‌های چسبان</span>
           </div>
-          <span class="note-count-badge" id="note-count-badge">۰ یادداشت</span>
+          <span class="badge rounded-pill bg-sky-subtle text-sky-dark border border-sky px-2 py-1" id="note-count-badge">۰ یادداشت</span>
         </div>
 
-        <!-- Note Input and Controls -->
-        <div class="toolbar-center">
-          <div class="input-container">
+        <!-- Center: Input, Notebook Selector, Color Palette & Add Button -->
+        <div class="toolbar-center d-flex align-items-center gap-2 flex-grow-1">
+          
+          <!-- Input field with search toggle icon -->
+          <div class="input-container flex-grow-1 position-relative">
             <input 
               type="text" 
               id="note-input" 
+              class="form-control rounded-pill sky-input"
               placeholder="یک یادداشت بنویسید و اینتر بزنید..." 
               maxlength="260"
               autocomplete="off"
               data-i18n-placeholder="inputPlaceholder"
+              aria-label="متن یادداشت جدید"
             />
           </div>
 
-          <!-- Notebook Selector for New Note -->
+          <!-- Notebook Selector Dropdown -->
           <div class="notebook-select-wrapper" title="انتخاب دفترچه">
-            <label for="notebook-select" class="sr-only">دفترچه</label>
-            <select id="notebook-select" class="notebook-dropdown">
+            <select id="notebook-select" class="form-select rounded-pill sky-select" aria-label="انتخاب دفترچه">
               <option value="todo" selected>📋 کارهای من</option>
               <option value="remember">🧠 یادآوری‌های من</option>
               <option value="history">📜 تاریخچه من</option>
@@ -57,136 +114,192 @@
           </div>
 
           <!-- Color selection dots -->
-          <div class="color-palette" title="انتخاب رنگ">
-            <button type="button" class="swatch active" data-color="yellow" style="--c: #fff59d;" title="زرد / Yellow"></button>
-            <button type="button" class="swatch" data-color="pink" style="--c: #ffab91;" title="صورتی / Pink"></button>
-            <button type="button" class="swatch" data-color="blue" style="--c: #b3e5fc;" title="آبی آسمانی / Sky Blue"></button>
-            <button type="button" class="swatch" data-color="green" style="--c: #c8e6c9;" title="سبز / Green"></button>
-            <button type="button" class="swatch" data-color="purple" style="--c: #e1bee7;" title="بنفش / Purple"></button>
-            <button type="button" class="swatch" data-color="orange" style="--c: #ffe082;" title="نارنجی / Orange"></button>
+          <div class="color-palette d-flex align-items-center gap-1" title="انتخاب رنگ" role="radiogroup" aria-label="انتخاب رنگ یادداشت">
+            <button type="button" class="swatch active" data-color="yellow" style="--c: #fff59d;" title="زرد / Yellow" aria-label="زرد"></button>
+            <button type="button" class="swatch" data-color="pink" style="--c: #ffab91;" title="صورتی / Pink" aria-label="صورتی"></button>
+            <button type="button" class="swatch" data-color="blue" style="--c: #b3e5fc;" title="آبی آسمانی / Sky Blue" aria-label="آبی"></button>
+            <button type="button" class="swatch" data-color="green" style="--c: #c8e6c9;" title="سبز / Green" aria-label="سبز"></button>
+            <button type="button" class="swatch" data-color="purple" style="--c: #e1bee7;" title="بنفش / Purple" aria-label="بنفش"></button>
+            <button type="button" class="swatch" data-color="orange" style="--c: #ffe082;" title="نارنجی / Orange" aria-label="نارنجی"></button>
           </div>
 
           <!-- Add Note Button -->
-          <button id="add-btn" class="add-btn" type="button" title="افزودن یادداشت">
-            <span class="btn-icon">＋</span>
-            <span class="btn-text" data-i18n="addBtn">افزودن</span>
+          <button id="add-btn" class="btn btn-sky rounded-pill d-flex align-items-center gap-1 px-3 shadow-sm" type="button" title="افزودن یادداشت">
+            <i class="bi bi-plus-lg"></i>
+            <span class="btn-text fw-bold" data-i18n="addBtn">افزودن</span>
           </button>
         </div>
 
-        <div class="toolbar-right">
+        <!-- Right: Actions (Search, Language, View mode) -->
+        <div class="toolbar-right d-flex align-items-center gap-2">
+          
+          <!-- Live Search Bar Toggle -->
+          <div class="search-box-wrapper position-relative">
+            <input 
+              type="search" 
+              id="search-input" 
+              class="form-control form-control-sm rounded-pill search-input" 
+              placeholder="جستجو در یادداشت‌ها..." 
+              data-i18n-placeholder="searchPlaceholder"
+              aria-label="جستجو در یادداشت‌ها"
+            />
+            <i class="bi bi-search search-icon"></i>
+          </div>
+
           <!-- Language Toggle Button (FA / EN) -->
-          <button id="lang-toggle-btn" class="toolbar-action-btn lang-btn" type="button" title="تغییر زبان / Switch Language">
-            <span class="btn-icon">🌐</span>
-            <span id="lang-label" class="btn-text">English</span>
+          <button id="lang-toggle-btn" class="btn btn-outline-sky rounded-pill d-flex align-items-center gap-1 px-3" type="button" title="تغییر زبان / Switch Language">
+            <i class="bi bi-translate"></i>
+            <span id="lang-label" class="btn-text fw-bold">English</span>
           </button>
 
           <!-- Toggle View Button (Just Notes) -->
-          <button id="toggle-view-btn" class="toolbar-action-btn view-toggle-btn" type="button" title="نمای تمیز (فقط یادداشت‌ها)">
-            <span id="view-icon">👁️</span>
-            <span class="btn-text" data-i18n="justNotes">فقط یادداشت‌ها</span>
+          <button id="toggle-view-btn" class="btn btn-outline-sky rounded-pill d-flex align-items-center gap-1 px-3" type="button" title="نمای تمیز (فقط یادداشت‌ها)">
+            <i class="bi bi-eye" id="view-icon"></i>
+            <span class="btn-text fw-bold d-none d-md-inline" data-i18n="justNotes">فقط یادداشت‌ها</span>
           </button>
         </div>
 
       </header>
 
-      <!-- Notebook Categories Tabs Navigation Bar -->
-      <nav class="notebook-tabs-bar" aria-label="Notebook Filters">
-        <div class="tabs-container">
-          <button type="button" class="tab-btn active" data-notebook="all">
-            <span class="tab-icon">✨</span>
-            <span class="tab-text" data-i18n="tabAll">همه یادداشت‌ها</span>
-            <span class="tab-count" id="count-all">0</span>
-          </button>
+      <!-- Notebook Navigation Tabs Bar (Bootstrap nav-pills) -->
+      <nav class="notebook-tabs-bar my-3 px-3 py-2 rounded-4 shadow-sm" aria-label="فیلتر دفترچه‌ها">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+          
+          <div class="nav nav-pills gap-2" id="notebook-tabs-group" role="tablist">
+            <button type="button" class="nav-link active rounded-pill d-flex align-items-center gap-2 py-2 px-3" data-notebook="all" role="tab" aria-selected="true">
+              <span>✨</span>
+              <span class="tab-text fw-bold" data-i18n="tabAll">همه یادداشت‌ها</span>
+              <span class="badge rounded-pill bg-sky-pill text-white" id="count-all">۰</span>
+            </button>
 
-          <button type="button" class="tab-btn" data-notebook="todo">
-            <span class="tab-icon">📋</span>
-            <span class="tab-text" data-i18n="tabTodo">کارهای من</span>
-            <span class="tab-count" id="count-todo">0</span>
-          </button>
+            <button type="button" class="nav-link rounded-pill d-flex align-items-center gap-2 py-2 px-3" data-notebook="todo" role="tab" aria-selected="false">
+              <span>📋</span>
+              <span class="tab-text fw-bold" data-i18n="tabTodo">کارهای من</span>
+              <span class="badge rounded-pill bg-sky-pill text-white" id="count-todo">۰</span>
+            </button>
 
-          <button type="button" class="tab-btn" data-notebook="remember">
-            <span class="tab-icon">🧠</span>
-            <span class="tab-text" data-i18n="tabRemember">یادآوری‌های من</span>
-            <span class="tab-count" id="count-remember">0</span>
-          </button>
+            <button type="button" class="nav-link rounded-pill d-flex align-items-center gap-2 py-2 px-3" data-notebook="remember" role="tab" aria-selected="false">
+              <span>🧠</span>
+              <span class="tab-text fw-bold" data-i18n="tabRemember">یادآوری‌های من</span>
+              <span class="badge rounded-pill bg-sky-pill text-white" id="count-remember">۰</span>
+            </button>
 
-          <button type="button" class="tab-btn" data-notebook="history">
-            <span class="tab-icon">📜</span>
-            <span class="tab-text" data-i18n="tabHistory">تاریخچه من</span>
-            <span class="tab-count" id="count-history">0</span>
-          </button>
-        </div>
+            <button type="button" class="nav-link rounded-pill d-flex align-items-center gap-2 py-2 px-3" data-notebook="history" role="tab" aria-selected="false">
+              <span>📜</span>
+              <span class="tab-text fw-bold" data-i18n="tabHistory">تاریخچه من</span>
+              <span class="badge rounded-pill bg-sky-pill text-white" id="count-history">۰</span>
+            </button>
+          </div>
 
-        <!-- Filter info status text -->
-        <div class="active-filter-indicator" id="filter-indicator">
-          <span class="indicator-dot"></span>
-          <span id="filter-text">نمایش تمام یادداشت‌ها</span>
+          <!-- Active Filter Status Indicator -->
+          <div class="active-filter-indicator d-flex align-items-center gap-2 text-sky-dark fw-medium small" id="filter-indicator">
+            <span class="indicator-dot"></span>
+            <span id="filter-text">نمایش تمام یادداشت‌ها</span>
+          </div>
+
         </div>
       </nav>
 
       <!-- Sticky Notes Board Canvas Area -->
-      <main class="board-canvas">
-        <div class="notes-grid" id="notes-grid">
+      <main class="board-canvas my-3" id="main-content" role="main">
+        <div class="notes-grid" id="notes-grid" aria-live="polite">
           <!-- Dynamic sticky notes injected by app.js -->
         </div>
 
         <!-- Empty state placeholder when notebook has no notes -->
-        <div class="empty-state hidden" id="empty-state">
-          <div class="empty-icon">☁️</div>
-          <h3 class="empty-title" data-i18n="emptyTitle">هیچ یادداشتی در این بخش نیست!</h3>
-          <p class="empty-desc" data-i18n="emptyDesc">یک یادداشت جدید بنویسید یا یادداشتی را به این دفترچه منتقل کنید.</p>
+        <div class="empty-state d-none text-center p-5 rounded-4 shadow-sm" id="empty-state">
+          <div class="empty-icon fs-1 mb-2">☁️</div>
+          <h2 class="empty-title h4 fw-bold text-sky-dark mb-2" data-i18n="emptyTitle">هیچ یادداشتی در این بخش نیست!</h2>
+          <p class="empty-desc text-muted mb-0" data-i18n="emptyDesc">یک یادداشت جدید بنویسید یا یادداشتی را به این دفترچه منتقل کنید.</p>
         </div>
       </main>
 
-    </div>
-  </div>
-
-  <!-- Notebook Selection Modal (appears when user clicks Finish / Move) -->
-  <div class="modal-overlay hidden" id="notebook-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div class="modal-title-box">
-          <span class="modal-icon">🎉</span>
-          <h3 class="modal-title" data-i18n="modalTitle">تکمیل و انتقال به دفترچه</h3>
+      <!-- Semantic Footer for SEO and Quick Help -->
+      <footer class="app-footer text-center py-3 text-sky-dark small opacity-75">
+        <div class="container">
+          <p class="mb-1">📌 <strong data-i18n="boardTitle">یادداشت‌های چسبان</strong> — سازماندهی هوشمند کارها و یادداشت‌ها با ذخیره‌سازی خودکار مرورگر</p>
+          <span class="footer-links">
+            <span class="badge bg-white text-sky-dark shadow-xs border">Bootstrap 5.3</span>
+            <span class="badge bg-white text-sky-dark shadow-xs border">HTML5 & CSS3</span>
+            <span class="badge bg-white text-sky-dark shadow-xs border">Persian & English</span>
+          </span>
         </div>
-        <button type="button" class="modal-close-btn" id="modal-close-btn">&times;</button>
-      </div>
-      <p class="modal-desc" data-i18n="modalDesc">تبریک! یادداشت تکمیل شد. می‌خواهید در کدام دفترچه ذخیره شود؟</p>
+      </footer>
 
-      <div class="notebook-choice-list">
-        <button type="button" class="choice-item" data-choice="history">
-          <span class="choice-icon">📜</span>
-          <div class="choice-info">
-            <strong class="choice-name" data-i18n="tabHistory">تاریخچه من</strong>
-            <span class="choice-hint" data-i18n="historyHint">ثبت در تاریخچه و آرشیو کارهای انجام‌شده</span>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 Modal for Notebook Selection (Finish button trigger) -->
+  <div class="modal fade" id="notebookBootstrapModal" tabindex="-1" aria-labelledby="notebookModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content sky-modal-content rounded-4 border-0 shadow-lg">
+        
+        <div class="modal-header border-0 pb-0">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fs-3">🎉</span>
+            <h2 class="modal-title h5 fw-bold text-sky-dark mb-0" id="notebookModalLabel" data-i18n="modalTitle">تکمیل و انتقال به دفترچه</h2>
           </div>
-          <span class="choice-badge" data-i18n="recommended">پیشنهادی</span>
-        </button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
 
-        <button type="button" class="choice-item" data-choice="remember">
-          <span class="choice-icon">🧠</span>
-          <div class="choice-info">
-            <strong class="choice-name" data-i18n="tabRemember">یادآوری‌های من</strong>
-            <span class="choice-hint" data-i18n="rememberHint">نگه‌داری به عنوان نکته یا یادآوری مهم</span>
+        <div class="modal-body py-3">
+          <p class="text-secondary small mb-3" data-i18n="modalDesc">تبریک! یادداشت تکمیل شد. می‌خواهید در کدام دفترچه ذخیره شود؟</p>
+
+          <div class="d-flex flex-column gap-2 notebook-choice-list">
+            
+            <button type="button" class="btn choice-item d-flex align-items-center p-3 rounded-3 text-start w-100 border text-decoration-none" data-choice="history">
+              <span class="choice-icon fs-2 me-3 ms-2">📜</span>
+              <div class="choice-info flex-grow-1">
+                <div class="d-flex align-items-center justify-content-between">
+                  <strong class="choice-name text-dark" data-i18n="tabHistory">تاریخچه من</strong>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1" data-i18n="recommended">پیشنهادی</span>
+                </div>
+                <span class="choice-hint text-muted small d-block" data-i18n="historyHint">ثبت در تاریخچه و آرشیو کارهای انجام‌شده</span>
+              </div>
+            </button>
+
+            <button type="button" class="btn choice-item d-flex align-items-center p-3 rounded-3 text-start w-100 border text-decoration-none" data-choice="remember">
+              <span class="choice-icon fs-2 me-3 ms-2">🧠</span>
+              <div class="choice-info flex-grow-1">
+                <strong class="choice-name text-dark d-block" data-i18n="tabRemember">یادآوری‌های من</strong>
+                <span class="choice-hint text-muted small d-block" data-i18n="rememberHint">نگه‌داری به عنوان نکته یا یادآوری مهم</span>
+              </div>
+            </button>
+
+            <button type="button" class="btn choice-item d-flex align-items-center p-3 rounded-3 text-start w-100 border text-decoration-none" data-choice="todo">
+              <span class="choice-icon fs-2 me-3 ms-2">📋</span>
+              <div class="choice-info flex-grow-1">
+                <strong class="choice-name text-dark d-block" data-i18n="tabTodo">کارهای من</strong>
+                <span class="choice-hint text-muted small d-block" data-i18n="todoHint">نگه‌داری در لیست کارهای روزانه</span>
+              </div>
+            </button>
+
           </div>
-        </button>
+        </div>
 
-        <button type="button" class="choice-item" data-choice="todo">
-          <span class="choice-icon">📋</span>
-          <div class="choice-info">
-            <strong class="choice-name" data-i18n="tabTodo">کارهای من</strong>
-            <span class="choice-hint" data-i18n="todoHint">نگه‌داری در لیست کارهای روزانه</span>
-          </div>
-        </button>
-      </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-light rounded-pill px-4 text-secondary" data-bs-dismiss="modal" data-i18n="cancel">انصراف</button>
+        </div>
 
-      <div class="modal-actions">
-        <button type="button" class="btn-cancel" id="modal-cancel-btn" data-i18n="cancel">انصراف</button>
       </div>
     </div>
   </div>
 
-  <!-- Audio elements generated dynamically via Web Audio API -->
+  <!-- Toast Notification for User Feedback -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+    <div id="actionToast" class="toast sky-toast border-0 rounded-4 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex align-items-center p-2">
+        <span id="toastIcon" class="fs-4 me-2 ms-2">✨</span>
+        <div class="toast-body flex-grow-1 fw-bold text-sky-dark" id="toastMessage">عملیات با موفقیت انجام شد</div>
+        <button type="button" class="btn-close me-2 ms-auto" data-bs-dismiss="toast" aria-label="بستن"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Application Logic JS -->
   <script src="app.js"></script>
 </body>
 </html>
