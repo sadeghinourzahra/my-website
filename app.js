@@ -526,12 +526,14 @@ function submitNoteFromModal() {
   const text = modalNoteTextarea.value.trim();
 
   if (!text) {
-    modalNoteTextarea.classList.add('is-invalid');
+    modalNoteTextarea.classList.add('is-invalid', 'shake');
+    if (modalSubmitAddBtn) modalSubmitAddBtn.classList.add('shake');
     playSound('error');
     modalNoteTextarea.focus();
     setTimeout(() => {
-      modalNoteTextarea.classList.remove('is-invalid');
-    }, 1200);
+      modalNoteTextarea.classList.remove('is-invalid', 'shake');
+      if (modalSubmitAddBtn) modalSubmitAddBtn.classList.remove('shake');
+    }, 450);
     return;
   }
 
