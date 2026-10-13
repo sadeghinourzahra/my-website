@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Sticky Notes Board - Sky & Web Net Theme with Bootstrap 5 & Persian RTL
+   Sticky Notes Board - Multi-Theme (White, Cream, Black, Sky) with Web Net
    ========================================================================== */
 
 :root {
@@ -9,24 +9,13 @@
   --font-note-en: 'Kalam', cursive, sans-serif;
   --font-note-fa: 'Vazirmatn', sans-serif;
 
-  /* Sky Color Palette */
-  --sky-deep: #034f84;
-  --sky-dark: #0369a1;
-  --sky-primary: #0284c7;
-  --sky-vibrant: #0ea5e9;
-  --sky-light: #38bdf8;
-  --sky-soft: #7dd3fc;
-  --sky-mist: #bae6fd;
-  --sky-cloud: #e0f2fe;
-  --sky-pure: #f0f9ff;
-
   /* Accent Colors */
   --accent-gold: #f59e0b;
   --accent-emerald: #10b981;
   --accent-purple: #8b5cf6;
   --accent-rose: #f43f5e;
 
-  /* Realistic Sticky Notes Colors */
+  /* Sticky Notes Realistic Colors */
   --note-yellow-bg: #fff9a6;
   --note-yellow-border: #facc15;
   --note-yellow-text: #372f05;
@@ -51,14 +40,112 @@
   --note-orange-border: #fb923c;
   --note-orange-text: #431407;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.78);
-  --glass-border: rgba(255, 255, 255, 0.9);
-  --glass-shadow: 0 16px 36px rgba(2, 79, 132, 0.16);
-  --glass-blur: blur(18px);
+  /* Default Sky Theme Variables */
+  --bg-gradient: linear-gradient(180deg, #0369a1 0%, #0284c7 20%, #0ea5e9 45%, #38bdf8 70%, #7dd3fc 90%, #bae6fd 100%);
+  --net-node-color: rgba(255, 255, 255, 0.35);
+  --net-line-color: rgba(255, 255, 255, 0.12);
+  --glow-1: rgba(255, 255, 255, 0.45);
+  --glow-2: rgba(224, 242, 254, 0.55);
+  --glow-3: rgba(255, 255, 255, 0.35);
+
+  --toolbar-bg: rgba(255, 255, 255, 0.78);
+  --toolbar-border: rgba(255, 255, 255, 0.9);
+  --toolbar-text: #034f84;
+  --badge-bg: rgba(2, 132, 199, 0.14);
+  --badge-border: rgba(2, 132, 199, 0.32);
+  --badge-text: #0369a1;
+
+  --add-btn-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  --add-btn-hover: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  --add-btn-shadow: rgba(2, 132, 199, 0.45);
+
+  --pill-active-bg: #ffffff;
+  --pill-active-text: #0284c7;
+  --pill-badge-bg: #0284c7;
 }
 
-/* Base Body & Reset */
+/* ==========================================================================
+   Theme 1: White Theme (تم سفید)
+   ========================================================================== */
+html[data-bg-theme="white"] {
+  --bg-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 45%, #f1f5f9 100%);
+  --net-node-color: rgba(15, 23, 42, 0.15);
+  --net-line-color: rgba(15, 23, 42, 0.06);
+  --glow-1: rgba(241, 245, 249, 0.8);
+  --glow-2: rgba(226, 232, 240, 0.6);
+  --glow-3: rgba(248, 250, 252, 0.7);
+
+  --toolbar-bg: rgba(255, 255, 255, 0.92);
+  --toolbar-border: rgba(226, 232, 240, 0.95);
+  --toolbar-text: #0f172a;
+  --badge-bg: rgba(15, 23, 42, 0.08);
+  --badge-border: rgba(15, 23, 42, 0.2);
+  --badge-text: #0f172a;
+
+  --add-btn-bg: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --add-btn-hover: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --add-btn-shadow: rgba(37, 99, 235, 0.35);
+
+  --pill-active-bg: #2563eb;
+  --pill-active-text: #ffffff;
+  --pill-badge-bg: #1d4ed8;
+}
+
+/* ==========================================================================
+   Theme 2: Cream Theme (تم کرم)
+   ========================================================================== */
+html[data-bg-theme="cream"] {
+  --bg-gradient: linear-gradient(180deg, #fdfbf7 0%, #fbf6ec 45%, #f5ece0 100%);
+  --net-node-color: rgba(146, 95, 34, 0.22);
+  --net-line-color: rgba(146, 95, 34, 0.08);
+  --glow-1: rgba(255, 248, 232, 0.7);
+  --glow-2: rgba(247, 236, 214, 0.6);
+  --glow-3: rgba(253, 248, 237, 0.8);
+
+  --toolbar-bg: rgba(253, 251, 247, 0.92);
+  --toolbar-border: rgba(229, 215, 195, 0.9);
+  --toolbar-text: #452912;
+  --badge-bg: rgba(180, 83, 9, 0.12);
+  --badge-border: rgba(180, 83, 9, 0.28);
+  --badge-text: #92400e;
+
+  --add-btn-bg: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  --add-btn-hover: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --add-btn-shadow: rgba(217, 119, 6, 0.38);
+
+  --pill-active-bg: #ffffff;
+  --pill-active-text: #b45309;
+  --pill-badge-bg: #b45309;
+}
+
+/* ==========================================================================
+   Theme 3: Black Theme (تم مشکی)
+   ========================================================================== */
+html[data-bg-theme="black"] {
+  --bg-gradient: linear-gradient(180deg, #07090e 0%, #0b0f19 45%, #111827 100%);
+  --net-node-color: rgba(56, 189, 248, 0.45);
+  --net-line-color: rgba(56, 189, 248, 0.15);
+  --glow-1: rgba(59, 130, 246, 0.25);
+  --glow-2: rgba(147, 51, 234, 0.25);
+  --glow-3: rgba(14, 165, 233, 0.2);
+
+  --toolbar-bg: rgba(17, 24, 39, 0.88);
+  --toolbar-border: rgba(255, 255, 255, 0.14);
+  --toolbar-text: #f8fafc;
+  --badge-bg: rgba(56, 189, 248, 0.16);
+  --badge-border: rgba(56, 189, 248, 0.35);
+  --badge-text: #38bdf8;
+
+  --add-btn-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  --add-btn-hover: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  --add-btn-shadow: rgba(56, 189, 248, 0.4);
+
+  --pill-active-bg: #1f2937;
+  --pill-active-text: #38bdf8;
+  --pill-badge-bg: #0284c7;
+}
+
+/* Base Body */
 * {
   box-sizing: border-box;
 }
@@ -67,13 +154,12 @@ body {
   font-family: var(--font-persian);
   min-height: 100vh;
   color: #0f172a;
-  background-color: var(--sky-primary);
   overflow-x: hidden;
   position: relative;
   line-height: 1.6;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* Direction-specific font bindings */
 html[dir="rtl"] body {
   font-family: var(--font-persian);
   direction: rtl;
@@ -84,25 +170,30 @@ html[dir="ltr"] body {
   direction: ltr;
 }
 
-/* Sky Color Utilities */
-.text-sky-dark {
-  color: var(--sky-deep) !important;
+/* Dynamic Theme Classes */
+.theme-brand-title {
+  color: var(--toolbar-text) !important;
+  transition: color 0.3s ease;
 }
 
-.bg-sky-subtle {
-  background-color: rgba(2, 132, 199, 0.12) !important;
+.theme-badge {
+  background-color: var(--badge-bg) !important;
+  border-color: var(--badge-border) !important;
+  color: var(--badge-text) !important;
+  font-weight: 700;
+  transition: all 0.3s ease;
 }
 
-.border-sky {
-  border-color: rgba(2, 132, 199, 0.28) !important;
+.bg-theme-pill {
+  background-color: var(--pill-badge-bg) !important;
 }
 
-.bg-sky-pill {
-  background-color: var(--sky-primary) !important;
+.theme-filter-indicator {
+  color: var(--toolbar-text) !important;
 }
 
 /* ==========================================================================
-   Sky Atmosphere & Web Net Geometric Background
+   Atmosphere & Web Net Geometric Background
    ========================================================================== */
 
 .sky-container {
@@ -110,16 +201,10 @@ html[dir="ltr"] body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: 
-    linear-gradient(180deg, 
-      #0369a1 0%, 
-      #0284c7 20%, 
-      #0ea5e9 45%, 
-      #38bdf8 70%, 
-      #7dd3fc 90%, 
-      #bae6fd 100%);
+  background: var(--bg-gradient);
   background-attachment: fixed;
   overflow: hidden;
+  transition: background 0.45s ease;
 }
 
 /* Web Net Grid Texture Overlay */
@@ -129,34 +214,35 @@ html[dir="ltr"] body {
   pointer-events: none;
   z-index: 1;
   background-image: 
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.32) 1.5px, transparent 2px),
-    linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
-    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.24) 0%, transparent 60%);
+    radial-gradient(circle at 50% 50%, var(--net-node-color) 1.5px, transparent 2px),
+    linear-gradient(to right, var(--net-line-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--net-line-color) 1px, transparent 1px),
+    radial-gradient(ellipse at 30% 20%, var(--net-node-color) 0%, transparent 60%);
   background-size: 38px 38px, 38px 38px, 38px 38px, 100% 100%;
-  opacity: 0.88;
+  opacity: 0.9;
+  transition: all 0.45s ease;
 }
 
-/* Soft Cloud Sunlight Glow */
+/* Atmospheric Glow */
 .sky-clouds-glow {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 2;
   background: 
-    radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.45) 0%, transparent 40%),
-    radial-gradient(circle at 85% 15%, rgba(224, 242, 254, 0.55) 0%, transparent 50%),
-    radial-gradient(circle at 50% 85%, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
-  animation: cloudsFloat 28s ease-in-out infinite alternate;
+    radial-gradient(circle at 15% 10%, var(--glow-1) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, var(--glow-2) 0%, transparent 50%),
+    radial-gradient(circle at 50% 85%, var(--glow-3) 0%, transparent 60%);
+  animation: atmosphereFloat 28s ease-in-out infinite alternate;
+  transition: all 0.45s ease;
 }
 
-@keyframes cloudsFloat {
+@keyframes atmosphereFloat {
   0% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-14px) scale(1.03); }
   100% { transform: translateY(8px) scale(0.98); }
 }
 
-/* Board Outer Wrapper */
 .board-frame {
   position: relative;
   z-index: 10;
@@ -166,7 +252,7 @@ html[dir="ltr"] body {
 }
 
 /* ==========================================================================
-   Floating Frosted Glass Toolbar
+   Toolbar & Prominent Add Button
    ========================================================================== */
 
 .floating-toolbar {
@@ -176,19 +262,17 @@ html[dir="ltr"] body {
   margin: 0 auto 12px;
   width: 100%;
   max-width: 1320px;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1.5px solid var(--glass-border);
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid var(--toolbar-border);
   border-radius: 40px;
   padding: 10px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  box-shadow: 
-    0 12px 32px rgba(2, 60, 105, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -202,93 +286,124 @@ html[dir="ltr"] body {
   opacity: 1;
 }
 
-/* Brand badge */
-.brand-badge .brand-icon {
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));
-}
-
-.brand-badge .brand-title {
-  letter-spacing: -0.02em;
-}
-
-/* Sky Input & Controls */
-.sky-input {
-  background: rgba(255, 255, 255, 0.92) !important;
-  border: 1.5px solid rgba(2, 132, 199, 0.25) !important;
-  font-family: inherit;
-  font-size: 0.92rem;
-  color: #0f172a;
-  padding: 8px 18px;
-  transition: all 0.2s ease;
-}
-
-.sky-input:focus {
-  border-color: var(--sky-primary) !important;
-  background: #ffffff !important;
-  box-shadow: 0 0 0 3.5px rgba(14, 165, 233, 0.25) !important;
-}
-
-/* Dropdown Selector */
-.sky-select {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  border: 1.5px solid rgba(2, 132, 199, 0.25) !important;
-  color: var(--sky-dark) !important;
-  font-weight: 700;
-  font-size: 0.86rem;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.sky-select:focus {
-  border-color: var(--sky-primary) !important;
-  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2) !important;
-}
-
-/* Buttons */
-.btn-sky {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+/* The Prominent Add Button (Replaces old text input) */
+.btn-main-add {
+  background: var(--add-btn-bg) !important;
   color: #ffffff !important;
   border: none !important;
   font-family: inherit;
-  font-size: 0.88rem;
-  font-weight: 700;
-  transition: all 0.2s ease;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 16px var(--add-btn-shadow) !important;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
 }
 
-.btn-sky:hover {
-  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45) !important;
+.btn-main-add:hover {
+  background: var(--add-btn-hover) !important;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 24px var(--add-btn-shadow) !important;
 }
 
-.btn-outline-sky {
-  background: rgba(255, 255, 255, 0.85) !important;
-  border: 1.5px solid rgba(2, 132, 199, 0.24) !important;
-  color: var(--sky-dark) !important;
+.btn-main-add:active {
+  transform: scale(0.98);
+}
+
+/* Background Theme Selector Box */
+.theme-selector-box {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html[data-bg-theme="black"] .theme-selector-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+}
+
+.btn-theme-dot {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  background: transparent;
+  transition: transform 0.18s ease;
+}
+
+.btn-theme-dot:hover {
+  transform: scale(1.2);
+}
+
+.btn-theme-dot.active {
+  border-color: #2563eb;
+  transform: scale(1.22);
+}
+
+html[data-bg-theme="black"] .btn-theme-dot.active {
+  border-color: #38bdf8;
+}
+
+.dot-color {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: block;
+}
+
+.dot-white {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+}
+
+.dot-cream {
+  background: #fbf6ec;
+  border: 1.5px solid #d4b483;
+}
+
+.dot-black {
+  background: #111827;
+  border: 1.5px solid #475569;
+}
+
+.dot-sky {
+  background: #38bdf8;
+  border: 1.5px solid #0284c7;
+}
+
+/* Secondary Toolbar Buttons */
+.btn-outline-theme {
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1.5px solid var(--toolbar-border) !important;
+  color: var(--toolbar-text) !important;
   font-family: inherit;
   font-size: 0.84rem;
   font-weight: 700;
   transition: all 0.2s ease;
 }
 
-.btn-outline-sky:hover {
-  background: #ffffff !important;
-  color: var(--sky-primary) !important;
-  border-color: var(--sky-primary) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.16) !important;
+html[data-bg-theme="black"] .btn-outline-theme {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Live Search Box */
+.btn-outline-theme:hover {
+  background: #ffffff !important;
+  color: #0284c7 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Search Box */
 .search-box-wrapper {
   min-width: 130px;
-  max-width: 180px;
+  max-width: 175px;
 }
 
 .search-input {
   background: rgba(255, 255, 255, 0.88);
-  border: 1.5px solid rgba(2, 132, 199, 0.2);
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
   padding-left: 28px;
   font-size: 0.8rem;
   transition: all 0.2s ease;
@@ -301,49 +416,22 @@ html[dir="rtl"] .search-input {
 
 .search-input:focus {
   background: #ffffff;
-  border-color: var(--sky-primary);
-  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
-  min-width: 180px;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  min-width: 175px;
 }
 
 .search-icon {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--sky-primary);
+  color: #64748b;
   font-size: 0.8rem;
   pointer-events: none;
 }
 
-html[dir="ltr"] .search-icon {
-  left: 10px;
-}
-
-html[dir="rtl"] .search-icon {
-  right: 10px;
-}
-
-/* Color Swatches */
-.swatch {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: var(--c);
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.swatch:hover {
-  transform: scale(1.22);
-}
-
-.swatch.active {
-  transform: scale(1.28);
-  border-color: #0284c7;
-  box-shadow: 0 0 0 2.5px rgba(2, 132, 199, 0.45);
-}
+html[dir="ltr"] .search-icon { left: 10px; }
+html[dir="rtl"] .search-icon { right: 10px; }
 
 /* ==========================================================================
    Notebook Tabs Filter Navigation Bar
@@ -353,14 +441,14 @@ html[dir="rtl"] .search-icon {
   max-width: 1320px;
   width: 100%;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.42);
+  background: var(--toolbar-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--toolbar-border);
 }
 
 .notebook-tabs-bar .nav-pills .nav-link {
-  color: var(--sky-deep);
+  color: var(--toolbar-text);
   background: transparent;
   font-size: 0.88rem;
   font-weight: 700;
@@ -368,19 +456,13 @@ html[dir="rtl"] .search-icon {
 }
 
 .notebook-tabs-bar .nav-pills .nav-link:hover {
-  background: rgba(255, 255, 255, 0.65);
-  color: #034f84;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .notebook-tabs-bar .nav-pills .nav-link.active {
-  background: #ffffff;
-  color: var(--sky-primary);
-  box-shadow: 0 3px 12px rgba(2, 132, 199, 0.22);
-}
-
-.notebook-tabs-bar .nav-link.active .badge {
-  background-color: var(--sky-primary) !important;
-  color: #ffffff !important;
+  background: var(--pill-active-bg);
+  color: var(--pill-active-text);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
 }
 
 .indicator-dot {
@@ -420,8 +502,8 @@ html[dir="rtl"] .search-icon {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 
-    0 1px 3px rgba(2, 60, 105, 0.12),
-    0 10px 24px rgba(2, 60, 105, 0.18);
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 10px 24px rgba(0, 0, 0, 0.18);
   transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease;
   animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   transform: rotate(var(--rotation, 0deg));
@@ -436,7 +518,7 @@ html[dir="rtl"] .search-icon {
   bottom: 8px;
   width: 65%;
   height: 25px;
-  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.24);
   transform: skew(6deg) rotate(4deg);
   z-index: -1;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -451,12 +533,12 @@ html[dir="rtl"] .sticky-note::after {
 .sticky-note:hover {
   transform: rotate(0deg) scale(1.05) translateY(-6px) !important;
   box-shadow: 
-    0 20px 38px rgba(2, 79, 132, 0.26),
-    0 8px 14px rgba(2, 79, 132, 0.16);
+    0 20px 38px rgba(0, 0, 0, 0.26),
+    0 8px 14px rgba(0, 0, 0, 0.16);
   z-index: 35;
 }
 
-/* 3D Push-Pin with Sky Pearl Polish */
+/* Realistic Push-Pin */
 .sticky-pin {
   position: absolute;
   top: -11px;
@@ -467,7 +549,7 @@ html[dir="rtl"] .sticky-note::after {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #38bdf8, #0284c7 70%, #034f84 100%);
   box-shadow: 
-    0 3px 6px rgba(2, 60, 105, 0.45),
+    0 3px 6px rgba(0, 0, 0, 0.38),
     inset 0 1px 3px rgba(255, 255, 255, 0.8);
   z-index: 10;
   pointer-events: none;
@@ -486,7 +568,6 @@ html[dir="rtl"] .sticky-note::after {
   z-index: 5;
 }
 
-/* Notebook Badge on Card */
 .note-notebook-badge {
   font-size: 0.73rem;
   font-weight: 700;
@@ -511,7 +592,7 @@ html[dir="rtl"] .sticky-note::after {
 
 /* Finish Button on Card */
 .finish-btn {
-  background: rgba(16, 185, 129, 0.16);
+  background: rgba(16, 185, 129, 0.18);
   border: 1px solid rgba(16, 185, 129, 0.45);
   color: #065f46;
   font-family: inherit;
@@ -579,10 +660,10 @@ html[dir="ltr"] .note-body {
   text-align: left;
 }
 
-/* Finished / Completed Note State */
+/* Finished / Completed State */
 .sticky-note.is-finished {
   opacity: 0.92;
-  box-shadow: 0 4px 14px rgba(2, 60, 105, 0.14);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
 }
 
 .sticky-note.is-finished .note-body {
@@ -591,7 +672,6 @@ html[dir="ltr"] .note-body {
   opacity: 0.75;
 }
 
-/* Completed Rubber Stamp Badge */
 .finished-stamp {
   position: absolute;
   bottom: 38px;
@@ -634,7 +714,7 @@ html[dir="rtl"] .finished-stamp {
   padding-top: 0.4rem;
 }
 
-/* Sticky Colors Themes */
+/* Note Colors */
 .note-yellow { background-color: var(--note-yellow-bg); color: var(--note-yellow-text); border-top: 1px solid var(--note-yellow-border); }
 .note-pink { background-color: var(--note-pink-bg); color: var(--note-pink-text); border-top: 1px solid var(--note-pink-border); }
 .note-blue { background-color: var(--note-blue-bg); color: var(--note-blue-text); border-top: 1px solid var(--note-blue-border); }
@@ -657,29 +737,14 @@ html[dir="rtl"] .finished-stamp {
   100% { opacity: 0; transform: scale(0.3) translateY(34px) rotate(16deg); }
 }
 
-/* Shake Animation on empty input */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
-}
-
-.shake {
-  animation: shake 0.4s ease-in-out both !important;
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.35) !important;
-}
-
-/* ==========================================================================
-   Empty State Placeholder
-   ========================================================================== */
-
+/* Empty State */
 .empty-state {
-  background: rgba(255, 255, 255, 0.42);
+  background: var(--toolbar-bg);
   backdrop-filter: blur(14px);
-  border: 1.5px dashed rgba(255, 255, 255, 0.8);
+  border: 1.5px dashed var(--toolbar-border);
   max-width: 520px;
   margin: 30px auto;
+  color: var(--toolbar-text);
 }
 
 .empty-icon {
@@ -691,14 +756,28 @@ html[dir="rtl"] .finished-stamp {
   100% { transform: translateY(-8px); }
 }
 
-/* ==========================================================================
-   Bootstrap Modal & Choice Items Styling
-   ========================================================================== */
-
-.sky-modal-content {
-  background: rgba(255, 255, 255, 0.96) !important;
+/* Modal Styling */
+.theme-modal-content {
+  background: rgba(255, 255, 255, 0.98) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+html[data-bg-theme="black"] .theme-modal-content {
+  background: rgba(17, 24, 39, 0.98) !important;
+  color: #f8fafc;
+}
+
+html[data-bg-theme="black"] .theme-modal-content .form-label,
+html[data-bg-theme="black"] .theme-modal-content .modal-title,
+html[data-bg-theme="black"] .theme-modal-content .choice-name {
+  color: #f8fafc !important;
+}
+
+html[data-bg-theme="black"] .modal-textarea {
+  background: #1f2937;
+  color: #ffffff;
+  border-color: #374151;
 }
 
 .choice-item {
@@ -707,24 +786,53 @@ html[dir="rtl"] .finished-stamp {
   transition: all 0.2s ease;
 }
 
+html[data-bg-theme="black"] .choice-item {
+  background: #1f2937;
+  border-color: #374151;
+}
+
 .choice-item:hover {
   background: #f0f9ff !important;
-  border-color: var(--sky-primary) !important;
+  border-color: #0284c7 !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
 }
 
-/* Toast Styling */
-.sky-toast {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(2, 132, 199, 0.2);
+html[data-bg-theme="black"] .choice-item:hover {
+  background: #111827 !important;
+  border-color: #38bdf8 !important;
 }
 
-/* ==========================================================================
-   Responsive Adaptations
-   ========================================================================== */
+/* Swatches in Modal */
+.modal-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--c);
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
 
+.modal-swatch:hover {
+  transform: scale(1.2);
+}
+
+.modal-swatch.active {
+  transform: scale(1.25);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.4);
+}
+
+/* Toast Styling */
+.theme-toast {
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(12px);
+  color: var(--toolbar-text);
+  border: 1px solid var(--toolbar-border);
+}
+
+/* Responsive Adaptations */
 @media (max-width: 992px) {
   .floating-toolbar {
     flex-wrap: wrap;
@@ -734,6 +842,7 @@ html[dir="rtl"] .finished-stamp {
   .toolbar-center {
     order: 3;
     width: 100%;
+    justify-content: center !important;
     flex-wrap: wrap;
   }
   .search-box-wrapper {

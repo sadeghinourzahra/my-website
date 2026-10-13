@@ -1,7 +1,8 @@
 /**
- * Sticky Notes Application with Bootstrap 5, Sky & Web Net Theme
+ * Sticky Notes Application with Bootstrap 5, Themes (White, Cream, Black, Sky)
  * Features:
- * - Bootstrap 5 integration (Modal, Toast, Tooltips, dynamic RTL/LTR stylesheet)
+ * - Theme switcher: White, Cream, Black, Sky with Net overlay
+ * - Prominent "Add" button triggering the Bootstrap Add Note Modal
  * - Full Persian (فارسی) & English language toggle with SEO metadata updates
  * - Notebooks: 'todo' (To do it), 'remember' (My remember it), 'history' (My history)
  * - Finish button on notes with celebratory Web Audio synthesizer & Bootstrap modal chooser
@@ -11,27 +12,31 @@
 
 const STORAGE_KEY = 'sticky_notes_data_v2';
 const LANG_STORAGE_KEY = 'sticky_notes_lang';
+const THEME_STORAGE_KEY = 'sticky_notes_theme';
 const COLOR_PALETTE = ['yellow', 'pink', 'blue', 'green', 'purple', 'orange'];
 
 // State
 let currentLang = localStorage.getItem(LANG_STORAGE_KEY) || 'fa';
+let currentTheme = localStorage.getItem(THEME_STORAGE_KEY) || 'sky';
 let activeNotebookFilter = 'all';
 let searchQuery = '';
-let currentColorIndex = 0;
-let selectedColor = 'yellow';
+let selectedModalColor = 'yellow';
 let pendingFinishNoteId = null;
-let bootstrapModalInstance = null;
+
+// Bootstrap modal instances
+let addNoteModalInstance = null;
+let notebookModalInstance = null;
 let bootstrapToastInstance = null;
 
-// Complete bilingual translations dictionary
+// Bilingual translations dictionary
 const I18N = {
   fa: {
     pageTitle: "یادداشت‌های چسبان | Sticky Notes Board - برنامه مدیریت کارها و یادداشت",
-    seoDescription: "برنامه تابلوی یادداشت‌های چسبان آنلاین با تم زیبای آسمان و تور، پشتیبانی کامل از زبان فارسی و انگلیسی، دسته‌بندی در دفترچه‌های کارهای من (To do it)، یادآوری‌ها (Remember) و تاریخچه (History) با ذخیره‌سازی خودکار.",
+    seoDescription: "برنامه تابلوی یادداشت‌های چسبان آنلاین با تم‌های سفید، کرم، مشکی و آسمان، پشتیبانی کامل از زبان فارسی و انگلیسی، دسته‌بندی در دفترچه‌های کارهای من (To do it)، یادآوری‌ها (Remember) و تاریخچه (History) با ذخیره‌سازی خودکار.",
     boardTitle: "یادداشت‌های چسبان",
-    inputPlaceholder: "یک یادداشت بنویسید و اینتر بزنید...",
+    addBtn: "افزودن یادداشت",
+    themeLabel: "رنگ پس‌زمینه:",
     searchPlaceholder: "جستجو در یادداشت‌ها...",
-    addBtn: "افزودن",
     langToggle: "English",
     justNotes: "فقط یادداشت‌ها",
     showControls: "نمایش کنترل‌ها",
@@ -48,7 +53,13 @@ const I18N = {
     noteSingular: "یادداشت",
     notePlural: "یادداشت",
     emptyTitle: "هیچ یادداشتی در این بخش نیست!",
-    emptyDesc: "یک یادداشت جدید بنویسید یا یادداشتی را به این دفترچه منتقل کنید.",
+    emptyDesc: "روی دکمه «افزودن یادداشت» کلیک کنید یا یادداشتی را به این دفترچه منتقل نمایید.",
+    addNoteModalTitle: "افزودن یادداشت چسبان جدید",
+    noteContentLabel: "متن یادداشت:",
+    modalTextareaPlaceholder: "متن یادداشت خود را اینجا بنویسید...",
+    shortcutHint: "کلید میانبر: فشردن Ctrl + Enter برای ثبت سریع",
+    chooseNotebookLabel: "انتخاب دفترچه:",
+    chooseColorLabel: "رنگ برگه یادداشت:",
     modalTitle: "تکمیل و انتقال به دفترچه",
     modalDesc: "تبریک! یادداشت تکمیل شد. می‌خواهید در کدام دفترچه ذخیره شود؟",
     recommended: "پیشنهادی",
@@ -62,19 +73,20 @@ const I18N = {
     filterHistory: "نمایش: دفترچه تاریخچه",
     deleteTitle: "حذف یادداشت",
     editHint: "کلیک برای ویرایش متن",
-    toastNoteAdded: "یادداشت جدید با موفقیت اضافه شد 📌",
+    toastNoteAdded: "یادداشت جدید با موفقیت روی تابلو چسبانده شد 📌",
     toastNoteFinished: "یادداشت تکمیل شد! به کدام دفترچه منتقل شود؟ 🎉",
     toastNoteMoved: "یادداشت به دفترچه جدید منتقل شد ✨",
     toastNoteDeleted: "یادداشت کنده و حذف شد 🗑️",
-    toastLangChanged: "زبان به فارسی تغییر یافت 🇮🇷"
+    toastLangChanged: "زبان به فارسی تغییر یافت 🇮🇷",
+    toastThemeChanged: "تم پس‌زمینه با موفقیت تغییر کرد 🎨"
   },
   en: {
     pageTitle: "Sticky Notes Board | Task & Sticky Notes Organizer",
-    seoDescription: "Realistic sticky notes bulletin board with Sky & Web Net theme, Bootstrap 5, Persian and English language support, and notebooks for To do it, Remember, and History.",
+    seoDescription: "Realistic sticky notes bulletin board with White, Cream, Black, and Sky themes, Bootstrap 5, Persian and English language support, and notebooks for To do it, Remember, and History.",
     boardTitle: "Sticky Notes",
-    inputPlaceholder: "Write a sticky note and press Enter...",
+    addBtn: "Add Note",
+    themeLabel: "Background Color:",
     searchPlaceholder: "Search notes...",
-    addBtn: "Add",
     langToggle: "فارسی",
     justNotes: "Just Notes",
     showControls: "Show Controls",
@@ -91,7 +103,13 @@ const I18N = {
     noteSingular: "note",
     notePlural: "notes",
     emptyTitle: "No notes in this notebook!",
-    emptyDesc: "Write a new note or move a note into this notebook.",
+    emptyDesc: "Click the 'Add Note' button to create a new sticky note or move a note here.",
+    addNoteModalTitle: "Add New Sticky Note",
+    noteContentLabel: "Note Content:",
+    modalTextareaPlaceholder: "Type your note here...",
+    shortcutHint: "Shortcut: Press Ctrl + Enter to quickly save",
+    chooseNotebookLabel: "Choose Notebook:",
+    chooseColorLabel: "Note Color:",
     modalTitle: "Finish & Choose Notebook",
     modalDesc: "Congratulations! Note finished. Which notebook would you like to keep it in?",
     recommended: "Recommended",
@@ -109,7 +127,8 @@ const I18N = {
     toastNoteFinished: "Note completed! Choose destination notebook 🎉",
     toastNoteMoved: "Note moved to selected notebook ✨",
     toastNoteDeleted: "Note peeled off and deleted 🗑️",
-    toastLangChanged: "Language switched to English 🌐"
+    toastLangChanged: "Language switched to English 🌐",
+    toastThemeChanged: "Background theme updated 🎨"
   }
 };
 
@@ -118,7 +137,7 @@ const STARTER_NOTES = {
   fa: [
     {
       id: 'starter-fa-1',
-      text: "✨ به تابلوی یادداشت‌های چسبان خوش آمدید!\nایده‌ها و برنامه‌های روزانه خود را در میان آسمان ثبت کنید.",
+      text: "✨ به تابلوی یادداشت‌های چسبان خوش آمدید!\nمی‌توانید رنگ پس‌زمینه را به سفید، کرم، مشکی یا آسمانی تغییر دهید.",
       color: 'blue',
       notebook: 'todo',
       isFinished: false,
@@ -127,7 +146,7 @@ const STARTER_NOTES = {
     },
     {
       id: 'starter-fa-2',
-      text: "📋 کارهای من:\n• بررسی طراحی وبسایت با بوت‌استرپ ۵\n• نوشیدن قهوه تازه ☕\n• جلسه تیمی ساعت ۴",
+      text: "📋 کارهای من:\n• بررسی طراحی وبسایت با بوت‌استرپ ۵\n• تست رنگ‌های پس‌زمینه (سفید، کرم، مشکی) 🎨\n• جلسه تیمی ساعت ۴",
       color: 'yellow',
       notebook: 'todo',
       isFinished: false,
@@ -145,7 +164,7 @@ const STARTER_NOTES = {
     },
     {
       id: 'starter-fa-4',
-      text: "📜 سابقه کارها:\nطراحی اولیه تابلوی آسمان و ادغام با بوت‌استرپ ۵ با موفقیت انجام شد.",
+      text: "📜 سابقه کارها:\nانتخاب رنگ پس‌زمینه (سفید، کرم، مشکی) و دکمه جدید افزودن یادداشت پیاده‌سازی شد.",
       color: 'green',
       notebook: 'history',
       isFinished: true,
@@ -157,7 +176,7 @@ const STARTER_NOTES = {
   en: [
     {
       id: 'starter-en-1',
-      text: "✨ Welcome to Sticky Notes Board!\nPin your ideas, tasks, and thoughts against the sky web grid.",
+      text: "✨ Welcome to Sticky Notes Board!\nSwitch background colors between White, Cream, Black, and Sky anytime.",
       color: 'blue',
       notebook: 'todo',
       isFinished: false,
@@ -166,7 +185,7 @@ const STARTER_NOTES = {
     },
     {
       id: 'starter-en-2',
-      text: "📋 To do it:\n• Review Bootstrap 5 UI responsiveness\n• Grab fresh coffee ☕\n• Team sync at 4 PM",
+      text: "📋 To do it:\n• Test White, Cream & Black themes 🎨\n• Review Bootstrap 5 UI responsiveness\n• Team sync at 4 PM",
       color: 'yellow',
       notebook: 'todo',
       isFinished: false,
@@ -184,7 +203,7 @@ const STARTER_NOTES = {
     },
     {
       id: 'starter-en-4',
-      text: "📜 My history:\nInitial project deployment completed successfully.",
+      text: "📜 My history:\nTheme switcher and prominent Add button features added successfully.",
       color: 'green',
       notebook: 'history',
       isFinished: true,
@@ -196,12 +215,9 @@ const STARTER_NOTES = {
 };
 
 // DOM References
-const noteInput = document.getElementById('note-input');
-const notebookSelect = document.getElementById('notebook-select');
 const addBtn = document.getElementById('add-btn');
 const notesGrid = document.getElementById('notes-grid');
 const noteCountBadge = document.getElementById('note-count-badge');
-const colorSwatches = document.querySelectorAll('.swatch');
 const toggleViewBtn = document.getElementById('toggle-view-btn');
 const langToggleBtn = document.getElementById('lang-toggle-btn');
 const langLabel = document.getElementById('lang-label');
@@ -211,9 +227,17 @@ const tabButtons = document.querySelectorAll('#notebook-tabs-group .nav-link');
 const filterText = document.getElementById('filter-text');
 const searchInput = document.getElementById('search-input');
 const bootstrapCssLink = document.getElementById('bootstrap-css');
+const themeDotButtons = document.querySelectorAll('.btn-theme-dot');
 
-// Bootstrap Modal DOM
-const modalElement = document.getElementById('notebookBootstrapModal');
+// Add Note Modal DOM References
+const addNoteModalEl = document.getElementById('addNoteModal');
+const modalNoteTextarea = document.getElementById('modal-note-textarea');
+const modalNotebookSelect = document.getElementById('modal-notebook-select');
+const modalSubmitAddBtn = document.getElementById('modal-submit-add-btn');
+const modalSwatches = document.querySelectorAll('.modal-swatch');
+
+// Finish Note Modal DOM References
+const notebookModalEl = document.getElementById('notebookBootstrapModal');
 const choiceItems = document.querySelectorAll('.choice-item');
 
 // Toast DOM
@@ -244,7 +268,6 @@ function playSound(type) {
       osc.start(now);
       osc.stop(now + 0.12);
     } else if (type === 'finish') {
-      // Celebratory two-tone chime
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(587.33, now);
       osc.frequency.setValueAtTime(880, now + 0.08);
@@ -269,12 +292,12 @@ function playSound(type) {
       osc.stop(now + 0.18);
     }
   } catch (e) {
-    // Autoplay policy fallback
+    // Autoplay fallback
   }
 }
 
 /**
- * Bootstrap Toast Notification
+ * Bootstrap Toast
  */
 function showToast(msg, icon = '✨') {
   if (toastElement && window.bootstrap) {
@@ -288,7 +311,7 @@ function showToast(msg, icon = '✨') {
 }
 
 /**
- * LocalStorage Helpers
+ * Storage Helpers
  */
 function getSavedNotes() {
   const data = localStorage.getItem(STORAGE_KEY);
@@ -310,6 +333,31 @@ function saveNotes(notes) {
 }
 
 /**
+ * Theme Manager: White, Cream, Black, Sky
+ */
+function setTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  document.documentElement.setAttribute('data-bg-theme', theme);
+
+  // Sync theme dot buttons
+  themeDotButtons.forEach(btn => {
+    if (btn.dataset.theme === theme) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  // Adjust Bootstrap theme attribute for dark contrast
+  if (theme === 'black') {
+    document.documentElement.setAttribute('data-bs-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-bs-theme', 'light');
+  }
+}
+
+/**
  * Notebook Counters and Badges
  */
 function updateCounts() {
@@ -321,14 +369,12 @@ function updateCounts() {
   const rememberCount = notes.filter(n => n.notebook === 'remember').length;
   const historyCount = notes.filter(n => n.notebook === 'history').length;
 
-  // Header total badge
   const countUnit = total === 1 ? t.noteSingular : t.notePlural;
   const displayTotal = currentLang === 'fa' ? toPersianDigits(total) : total;
   if (noteCountBadge) {
     noteCountBadge.textContent = `${displayTotal} ${countUnit}`;
   }
 
-  // Tab counters
   const setTabCount = (id, count) => {
     const el = document.getElementById(id);
     if (el) el.textContent = currentLang === 'fa' ? toPersianDigits(count) : count;
@@ -458,27 +504,44 @@ function createNoteElement(note) {
 }
 
 /**
- * Add a new note
+ * Open the Add Note Modal
  */
-function handleAddNote() {
-  const text = noteInput.value.trim();
+function openAddNoteModal() {
+  if (addNoteModalEl && window.bootstrap) {
+    if (!addNoteModalInstance) {
+      addNoteModalInstance = new bootstrap.Modal(addNoteModalEl);
+    }
+    modalNoteTextarea.value = '';
+    addNoteModalInstance.show();
+    setTimeout(() => {
+      modalNoteTextarea.focus();
+    }, 250);
+  }
+}
+
+/**
+ * Submit note from modal
+ */
+function submitNoteFromModal() {
+  const text = modalNoteTextarea.value.trim();
 
   if (!text) {
-    triggerShakeAnimation();
+    modalNoteTextarea.classList.add('is-invalid');
     playSound('error');
-    noteInput.focus();
+    modalNoteTextarea.focus();
+    setTimeout(() => {
+      modalNoteTextarea.classList.remove('is-invalid');
+    }, 1200);
     return;
   }
 
-  const color = selectedColor || COLOR_PALETTE[currentColorIndex % COLOR_PALETTE.length];
-  currentColorIndex++;
+  const selectedNotebook = modalNotebookSelect ? modalNotebookSelect.value : 'todo';
   const randomRotation = (Math.random() * 5 - 2.5).toFixed(1);
-  const selectedNotebook = notebookSelect ? notebookSelect.value : 'todo';
 
   const newNote = {
     id: Date.now().toString(),
     text: text,
-    color: color,
+    color: selectedModalColor,
     notebook: selectedNotebook,
     isFinished: false,
     rotation: parseFloat(randomRotation),
@@ -489,15 +552,17 @@ function handleAddNote() {
   notes.unshift(newNote);
   saveNotes(notes);
 
-  noteInput.value = '';
-  noteInput.focus();
+  if (addNoteModalInstance) {
+    addNoteModalInstance.hide();
+  }
+
   playSound('add');
   showToast(I18N[currentLang].toastNoteAdded, '📌');
   renderNotes();
 }
 
 /**
- * Handle Finish Note action
+ * Finish Note Action
  */
 function handleFinishNote(id, noteEl) {
   const notes = getSavedNotes();
@@ -512,7 +577,6 @@ function handleFinishNote(id, noteEl) {
     renderNotes();
 
     showToast(I18N[currentLang].toastNoteFinished, '🎉');
-    // Open Bootstrap modal to choose destination notebook (e.g. My History)
     openNotebookModal(id);
   } else {
     note.isFinished = false;
@@ -523,21 +587,21 @@ function handleFinishNote(id, noteEl) {
 }
 
 /**
- * Bootstrap Modal management
+ * Destination Notebook Modal
  */
 function openNotebookModal(noteId) {
   pendingFinishNoteId = noteId;
-  if (modalElement && window.bootstrap) {
-    if (!bootstrapModalInstance) {
-      bootstrapModalInstance = new bootstrap.Modal(modalElement);
+  if (notebookModalEl && window.bootstrap) {
+    if (!notebookModalInstance) {
+      notebookModalInstance = new bootstrap.Modal(notebookModalEl);
     }
-    bootstrapModalInstance.show();
+    notebookModalInstance.show();
   }
 }
 
 function closeNotebookModal() {
-  if (bootstrapModalInstance) {
-    bootstrapModalInstance.hide();
+  if (notebookModalInstance) {
+    notebookModalInstance.hide();
   }
   pendingFinishNoteId = null;
 }
@@ -561,7 +625,7 @@ function assignNotebook(chosenNotebook) {
 }
 
 /**
- * Delete note
+ * Delete Note
  */
 function deleteNote(id, noteElement) {
   noteElement.classList.add('tear-off');
@@ -585,18 +649,6 @@ function updateNoteText(id, newText) {
   }
 }
 
-function triggerShakeAnimation() {
-  noteInput.classList.remove('shake');
-  addBtn.classList.remove('shake');
-  void noteInput.offsetWidth;
-  noteInput.classList.add('shake');
-  addBtn.classList.add('shake');
-  setTimeout(() => {
-    noteInput.classList.remove('shake');
-    addBtn.classList.remove('shake');
-  }, 450);
-}
-
 /**
  * Render notes matching active notebook filter and search query
  */
@@ -606,12 +658,10 @@ function renderNotes() {
 
   let filtered = notes;
 
-  // Filter by Notebook Tab
   if (activeNotebookFilter !== 'all') {
     filtered = filtered.filter(n => n.notebook === activeNotebookFilter);
   }
 
-  // Filter by Live Search Query
   if (searchQuery.trim()) {
     const q = searchQuery.trim().toLowerCase();
     filtered = filtered.filter(n => n.text.toLowerCase().includes(q));
@@ -639,7 +689,7 @@ function updateFilterText() {
   else if (activeNotebookFilter === 'history') msg = t.filterHistory;
 
   if (searchQuery.trim()) {
-    msg += ` (جستجو: "${searchQuery}")`;
+    msg += ` (${currentLang === 'fa' ? 'جستجو' : 'Search'}: "${searchQuery}")`;
   }
 
   if (filterText) {
@@ -658,7 +708,6 @@ function setLanguage(lang) {
   document.documentElement.lang = lang;
   document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
 
-  // Swap Bootstrap 5 RTL / LTR stylesheet
   if (bootstrapCssLink) {
     bootstrapCssLink.href = isRtl 
       ? 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css'
@@ -668,37 +717,31 @@ function setLanguage(lang) {
   const t = I18N[lang];
   document.title = t.pageTitle;
 
-  // Update SEO Meta Description
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) metaDesc.setAttribute('content', t.seoDescription);
 
-  // Update DOM elements with data-i18n
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (t[key]) el.textContent = t[key];
   });
 
-  // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.dataset.i18nPlaceholder;
     if (t[key]) el.placeholder = t[key];
   });
 
-  // Language button label
   if (langLabel) {
     langLabel.textContent = t.langToggle;
   }
 
-  // Update notebook dropdown in toolbar
-  if (notebookSelect) {
-    notebookSelect.innerHTML = `
+  if (modalNotebookSelect) {
+    modalNotebookSelect.innerHTML = `
       <option value="todo">${t.badgeTodo}</option>
       <option value="remember">${t.badgeRemember}</option>
       <option value="history">${t.badgeHistory}</option>
     `;
   }
 
-  // Seed starter notes if empty
   const notes = getSavedNotes();
   if (notes.length === 0) {
     const starters = STARTER_NOTES[lang] || STARTER_NOTES.fa;
@@ -712,13 +755,36 @@ function setLanguage(lang) {
  * Event Listeners & Initialization
  */
 function setupEventListeners() {
-  // Add Note
-  addBtn.addEventListener('click', handleAddNote);
-  noteInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
+  // Add Note Button opens Modal
+  addBtn.addEventListener('click', openAddNoteModal);
+
+  // Submit note from modal
+  modalSubmitAddBtn.addEventListener('click', submitNoteFromModal);
+
+  // Ctrl + Enter shortcut inside modal textarea
+  modalNoteTextarea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
       e.preventDefault();
-      handleAddNote();
+      submitNoteFromModal();
     }
+  });
+
+  // Modal color swatch selection
+  modalSwatches.forEach(swatch => {
+    swatch.addEventListener('click', () => {
+      modalSwatches.forEach(s => s.classList.remove('active'));
+      swatch.classList.add('active');
+      selectedModalColor = swatch.dataset.color;
+    });
+  });
+
+  // Background Theme Switcher (White, Cream, Black, Sky)
+  themeDotButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.theme;
+      setTheme(theme);
+      showToast(I18N[currentLang].toastThemeChanged, '🎨');
+    });
   });
 
   // Live Search Input
@@ -728,15 +794,6 @@ function setupEventListeners() {
       renderNotes();
     });
   }
-
-  // Swatches
-  colorSwatches.forEach(swatch => {
-    swatch.addEventListener('click', () => {
-      colorSwatches.forEach(s => s.classList.remove('active'));
-      swatch.classList.add('active');
-      selectedColor = swatch.dataset.color;
-    });
-  });
 
   // Language Toggle
   langToggleBtn.addEventListener('click', () => {
@@ -770,7 +827,7 @@ function setupEventListeners() {
     });
   }
 
-  // Choice items in modal
+  // Choice items in destination modal
   choiceItems.forEach(item => {
     item.addEventListener('click', () => {
       const choice = item.dataset.choice;
@@ -781,6 +838,7 @@ function setupEventListeners() {
 
 function init() {
   setupEventListeners();
+  setTheme(currentTheme);
   setLanguage(currentLang);
 }
 
