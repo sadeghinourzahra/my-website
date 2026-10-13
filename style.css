@@ -1236,3 +1236,403 @@ html[data-bg-theme="black"] .grammar-rule-card {
   min-width: 120px;
 }
 
+/* ==========================================================================
+   Mobile Web App Responsive System (Phones & Tablets)
+   Optimized for Persian (RTL) & English (LTR) Touch Viewports
+   ========================================================================== */
+
+/* Universal Touch & Mobile Optimizations */
+button, 
+.nav-link, 
+.grammar-chip, 
+.shelf-book, 
+.swatch, 
+.choice-item {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active, 
+.nav-link:active, 
+.grammar-chip:active, 
+.choice-item:active {
+  transform: scale(0.96);
+  opacity: 0.92;
+  transition: transform 0.08s ease;
+}
+
+/* Tablets & Small Laptops (<= 992px) */
+@media (max-width: 992px) {
+  .board-frame {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .floating-toolbar {
+    padding: 12px 18px;
+    gap: 12px;
+    border-radius: 24px;
+  }
+
+  .toolbar-center {
+    order: 3;
+    width: 100%;
+    justify-content: center !important;
+    gap: 12px;
+  }
+
+  .search-box-wrapper {
+    max-width: 160px;
+  }
+}
+
+/* Mobile Devices & Small Tablets (<= 768px) */
+@media (max-width: 768px) {
+  /* Atmosphere & Frame */
+  .board-frame {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 24px;
+  }
+
+  /* Floating Toolbar Mobile Stack */
+  .floating-toolbar {
+    flex-wrap: wrap;
+    border-radius: 22px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .toolbar-left {
+    order: 1;
+    gap: 8px;
+  }
+
+  .toolbar-right {
+    order: 2;
+    gap: 6px;
+    margin-inline-start: auto;
+  }
+
+  .toolbar-center {
+    order: 3;
+    width: 100%;
+    margin-top: 2px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    justify-content: space-between !important;
+    flex-wrap: wrap;
+  }
+
+  html[data-bg-theme="black"] .toolbar-center {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .brand-title {
+    font-size: 1rem;
+  }
+
+  .brand-icon {
+    font-size: 1.25rem;
+  }
+
+  #note-count-badge {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+
+  .btn-main-add {
+    flex-grow: 1;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 18px;
+  }
+
+  .theme-selector-box {
+    padding: 3px 6px;
+  }
+
+  .btn-theme-dot {
+    width: 26px;
+    height: 26px;
+  }
+
+  .btn-outline-theme {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+  }
+
+  /* Swipeable Mobile Navigation Tabs Bar */
+  .notebook-tabs-bar {
+    padding: 8px 10px;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    border-radius: 18px;
+  }
+
+  #notebook-tabs-group {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    gap: 6px !important;
+    width: 100%;
+  }
+
+  #notebook-tabs-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  #notebook-tabs-group .nav-link {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    border-radius: 16px;
+  }
+
+  .active-filter-indicator {
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+    font-size: 0.78rem;
+  }
+
+  /* Swipeable Grammar Lesson Filter Bar */
+  .grammar-filter-bar {
+    padding: 8px 12px;
+    border-radius: 18px;
+  }
+
+  #grammar-lesson-chips {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    width: 100%;
+  }
+
+  #grammar-lesson-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grammar-chip {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 5px 12px;
+    font-size: 0.78rem;
+  }
+
+  #quick-add-grammar-from-bar {
+    width: 100%;
+    margin-top: 6px;
+    padding: 6px 12px;
+  }
+
+  /* Sticky Notes Single Column Layout */
+  .notes-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sticky-note {
+    /* Straighten notes on mobile to prevent overflow and blur */
+    transform: rotate(0deg) !important;
+    padding: 18px 16px 14px 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .sticky-note:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  .sticky-pin {
+    top: -12px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .note-body {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    min-height: 70px;
+  }
+
+  .finish-btn, .delete-btn {
+    min-width: 34px;
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Library Banner & Shelves on Mobile */
+  .library-banner {
+    padding: 14px 14px;
+    border-radius: 20px;
+  }
+
+  .library-banner h2 {
+    font-size: 1.05rem;
+  }
+
+  .shelf-question-box {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 8px;
+  }
+
+  .shelf-question-text {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  #shelf-quick-selector {
+    display: flex;
+    width: 100%;
+  }
+
+  #shelf-quick-selector .shelf-btn {
+    flex: 1;
+    padding: 7px 0;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  #add-lesson-btn, #quick-add-grammar-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  /* 3D Shelves on Mobile */
+  .shelf-unit {
+    padding: 12px 14px 0 14px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .shelf-unit-header {
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+  }
+
+  .shelf-books-row {
+    min-height: 185px;
+    gap: 10px;
+    padding: 0 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .shelf-book {
+    height: 175px;
+    width: 48px;
+    padding: 8px 3px 12px 3px;
+  }
+
+  .shelf-book.size-sm { height: 165px; width: 44px; }
+  .shelf-book.size-md { height: 175px; width: 48px; }
+  .shelf-book.size-lg { height: 185px; width: 52px; }
+
+  .shelf-book:hover, .shelf-book:active {
+    transform: translateY(-12px) scale(1.04);
+  }
+
+  .book-spine-title {
+    font-size: 0.72rem;
+    max-height: 100px;
+  }
+
+  .shelf-plank {
+    height: 22px;
+    margin: 0 -14px;
+  }
+
+  /* Modals Touch Layout */
+  .modal-dialog {
+    margin: 10px auto;
+    max-width: calc(100% - 16px);
+  }
+
+  .modal-content {
+    border-radius: 24px;
+  }
+
+  /* Prevent automatic iOS zooming on text input */
+  .form-control, 
+  .form-select, 
+  .modal-textarea {
+    font-size: 16px !important;
+  }
+
+  .modal-swatch {
+    width: 34px;
+    height: 34px;
+  }
+
+  .choice-item {
+    padding: 10px 12px !important;
+  }
+
+  .choice-icon {
+    font-size: 1.5rem !important;
+  }
+
+  /* Mobile Toast */
+  .toast-container {
+    width: 100%;
+    padding: 12px !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  .toast {
+    max-width: 95%;
+    width: 100%;
+    border-radius: 18px;
+  }
+}
+
+/* Extra Small Mobile Screens (<= 400px, e.g. iPhone SE, Small Galaxy) */
+@media (max-width: 400px) {
+  .floating-toolbar {
+    padding: 8px 10px;
+  }
+
+  .brand-title {
+    font-size: 0.9rem;
+  }
+
+  .btn-main-add {
+    font-size: 0.82rem;
+    padding: 7px 12px;
+  }
+
+  .btn-outline-theme {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+
+  .search-box-wrapper {
+    max-width: 120px;
+  }
+
+  .shelf-book {
+    width: 44px;
+    height: 165px;
+  }
+
+  .book-spine-title {
+    font-size: 0.68rem;
+  }
+}
+
+
