@@ -154,7 +154,7 @@
       <nav class="notebook-tabs-bar my-3 px-3 py-2 rounded-4 shadow-sm" aria-label="فیلتر دفترچه‌ها">
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
           
-          <div class="nav nav-pills gap-2" id="notebook-tabs-group" role="tablist">
+          <div class="nav nav-pills gap-2 flex-wrap" id="notebook-tabs-group" role="tablist">
             <button type="button" class="nav-link active rounded-pill d-flex align-items-center gap-2 py-2 px-3" data-notebook="all" role="tab" aria-selected="true">
               <span>✨</span>
               <span class="tab-text fw-bold" data-i18n="tabAll">همه یادداشت‌ها</span>
@@ -178,6 +178,18 @@
               <span class="tab-text fw-bold" data-i18n="tabHistory">تاریخچه من</span>
               <span class="badge rounded-pill bg-theme-pill text-white" id="count-history">۰</span>
             </button>
+
+            <button type="button" class="nav-link rounded-pill d-flex align-items-center gap-2 py-2 px-3" data-notebook="grammar" role="tab" aria-selected="false">
+              <span>📖</span>
+              <span class="tab-text fw-bold" data-i18n="tabGrammar">دفترچه گرامر</span>
+              <span class="badge rounded-pill bg-theme-pill text-white" id="count-grammar">۰</span>
+            </button>
+
+            <button type="button" class="nav-link rounded-pill d-flex align-items-center gap-2 py-2 px-3 btn-nav-library" data-notebook="library" role="tab" aria-selected="false">
+              <span>🏛️</span>
+              <span class="tab-text fw-bold" data-i18n="tabLibrary">کتابخانه دروس</span>
+              <span class="badge rounded-pill bg-theme-pill text-white" id="count-library">۰</span>
+            </button>
           </div>
 
           <!-- Active Filter Status Indicator -->
@@ -191,8 +203,83 @@
 
       <!-- Sticky Notes Board Canvas Area -->
       <main class="board-canvas my-3" id="main-content" role="main">
+        
+        <!-- Grammar Lesson Filter Bar (Shown when Grammar Notebook is selected) -->
+        <div class="grammar-filter-bar d-none mb-3 p-2 rounded-4 shadow-sm" id="grammar-filter-bar">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <span class="fs-5">📖</span>
+              <strong class="small" data-i18n="filterByLesson">فیلتر بر اساس درس:</strong>
+            </div>
+            <div class="d-flex flex-wrap gap-1" id="grammar-lesson-chips">
+              <!-- Dynamically populated chips: All, Lesson 1, Lesson 2... -->
+            </div>
+            <button type="button" class="btn btn-sm btn-main-add rounded-pill px-3 py-1 shadow-xs" id="quick-add-grammar-from-bar">
+              <i class="bi bi-plus-lg me-1"></i>
+              <span class="small fw-bold" data-i18n="addGrammarRule">افزودن نکته گرامر</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Standard Sticky Notes Grid -->
         <div class="notes-grid" id="notes-grid" aria-live="polite">
           <!-- Dynamic sticky notes injected by app.js -->
+        </div>
+
+        <!-- Student Lessons Library View (Shown when Library tab is selected) -->
+        <div class="library-container d-none" id="library-view" aria-live="polite">
+          
+          <!-- Library Header Banner with Interactive Shelf Question -->
+          <div class="library-banner p-3 p-md-4 rounded-4 shadow-sm mb-4">
+            <div class="row align-items-center g-3">
+              <div class="col-lg-7">
+                <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                  <span class="fs-3">🏛️</span>
+                  <h2 class="h5 fw-bold mb-0 theme-brand-title" data-i18n="libraryBannerTitle">کتابخانه دروس دانش‌آموز</h2>
+                  <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1 student-badge-pill" id="student-name-display" role="button" title="کلیک برای تغییر نام دانش‌آموز">
+                    🎓 <span id="student-name-text">زهرا</span> <i class="bi bi-pencil-fill ms-1 small"></i>
+                  </span>
+                </div>
+                <p class="text-secondary small mb-3" data-i18n="libraryBannerDesc">درس‌ها و دفترچه‌های گرامر شما به صورت منظم روی قفسه‌ها قرار گرفته‌اند. روی هر کتاب کلیک کنید تا دفترچه گرامر آن باز شود.</p>
+                
+                <!-- Interactive Shelf Question Box -->
+                <div class="shelf-question-box d-flex flex-wrap align-items-center gap-2 pt-2 border-top">
+                  <div class="d-flex align-items-center gap-1">
+                    <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-circle p-1">❓</span>
+                    <strong class="small shelf-question-text" data-i18n="shelfQuestion">چند قفسه برای کتابخانه خود نیاز دارید؟</strong>
+                  </div>
+                  <div class="btn-group btn-group-sm rounded-pill overflow-hidden shadow-xs" id="shelf-quick-selector" role="group" aria-label="انتخاب تعداد قفسه">
+                    <button type="button" class="btn btn-outline-theme shelf-btn" data-shelves="1">۱</button>
+                    <button type="button" class="btn btn-outline-theme shelf-btn" data-shelves="2">۲</button>
+                    <button type="button" class="btn btn-outline-theme shelf-btn active" data-shelves="3">۳</button>
+                    <button type="button" class="btn btn-outline-theme shelf-btn" data-shelves="4">۴</button>
+                    <button type="button" class="btn btn-outline-theme shelf-btn" data-shelves="5">۵</button>
+                    <button type="button" class="btn btn-outline-theme shelf-btn" data-shelves="6">۶</button>
+                  </div>
+                  <button type="button" class="btn btn-sm btn-outline-theme rounded-pill px-2" id="open-shelf-modal-btn" title="تنظیم پیشرفته قفسه‌ها">
+                    <i class="bi bi-sliders"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-lg-5 text-lg-end d-flex flex-wrap gap-2 justify-content-lg-end">
+                <button type="button" class="btn btn-main-add rounded-pill px-3 py-2 shadow-xs d-flex align-items-center gap-2" id="add-lesson-btn">
+                  <i class="bi bi-book-half fs-5"></i>
+                  <span class="fw-bold" data-i18n="addLessonBtn">افزودن درس جدید</span>
+                </button>
+                <button type="button" class="btn btn-outline-theme rounded-pill px-3 py-2 shadow-xs d-flex align-items-center gap-2" id="quick-add-grammar-btn">
+                  <i class="bi bi-journal-plus fs-5"></i>
+                  <span class="fw-bold" data-i18n="addGrammarNoteBtn">نکته گرامر جدید</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic 3D Bookshelves Grid -->
+          <div class="bookshelves-container d-flex flex-column gap-5 mb-4" id="bookshelves-container">
+            <!-- Dynamic shelves rendered by app.js -->
+          </div>
+
         </div>
 
         <!-- Empty state placeholder when notebook has no notes -->
@@ -255,7 +342,41 @@
               <option value="todo" selected>📋 کارهای من (To do it)</option>
               <option value="remember">🧠 یادآوری‌های من (My remember it)</option>
               <option value="history">📜 تاریخچه من (My history)</option>
+              <option value="grammar">📖 دفترچه گرامر (Grammar Notebook)</option>
             </select>
+          </div>
+
+          <!-- Grammar & Lesson Specific Fields (Visible when Grammar Notebook is selected or for lesson notes) -->
+          <div id="grammar-fields-container" class="grammar-fields-box p-3 rounded-4 mb-3 border d-none">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <span class="fs-5">📖</span>
+                <strong class="small" data-i18n="grammarDetailsTitle">تنظیمات گرامر و درس دانش‌آموز</strong>
+              </div>
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" data-i18n="grammarBadge">قاعده گرامری</span>
+            </div>
+            
+            <div class="mb-2">
+              <label for="modal-lesson-select" class="form-label fw-bold small" data-i18n="forWhichLesson">برای کدام درس؟</label>
+              <select id="modal-lesson-select" class="form-select form-select-sm rounded-pill">
+                <!-- Dynamically populated from student lessons -->
+              </select>
+            </div>
+
+            <div class="mb-2">
+              <label for="modal-grammar-topic" class="form-label fw-bold small" data-i18n="grammarTopicLabel">عنوان مبحث گرامر:</label>
+              <input type="text" id="modal-grammar-topic" class="form-control form-control-sm rounded-pill" placeholder="مثال: زمان حال کامل (Present Perfect)" data-i18n-placeholder="topicPlaceholder">
+            </div>
+
+            <div class="mb-2">
+              <label for="modal-grammar-formula" class="form-label fw-bold small" data-i18n="grammarFormulaLabel">فرمول یا ساختار کلیدی (اختیاری):</label>
+              <input type="text" id="modal-grammar-formula" class="form-control form-control-sm rounded-pill font-monospace" placeholder="مثال: Subject + have/has + P.P" dir="ltr">
+            </div>
+
+            <div class="mb-0">
+              <label for="modal-grammar-example" class="form-label fw-bold small" data-i18n="grammarExampleLabel">مثال کاربردی (اختیاری):</label>
+              <input type="text" id="modal-grammar-example" class="form-control form-control-sm rounded-pill" placeholder="مثال: She has already read this lesson.">
+            </div>
           </div>
 
           <!-- Color Swatches Selection -->
@@ -314,6 +435,14 @@
               </div>
             </button>
 
+            <button type="button" class="btn choice-item d-flex align-items-center p-3 rounded-3 text-start w-100 border text-decoration-none" data-choice="grammar">
+              <span class="choice-icon fs-2 me-3 ms-2">📖</span>
+              <div class="choice-info flex-grow-1">
+                <strong class="choice-name text-dark d-block" data-i18n="tabGrammar">دفترچه گرامر</strong>
+                <span class="choice-hint text-muted small d-block" data-i18n="grammarHint">ثبت به عنوان نکته یا قاعده گرامری در درس</span>
+              </div>
+            </button>
+
             <button type="button" class="btn choice-item d-flex align-items-center p-3 rounded-3 text-start w-100 border text-decoration-none" data-choice="remember">
               <span class="choice-icon fs-2 me-3 ms-2">🧠</span>
               <div class="choice-info flex-grow-1">
@@ -337,6 +466,225 @@
           <button type="button" class="btn btn-light rounded-pill px-4 text-secondary" data-bs-dismiss="modal" data-i18n="cancel">انصراف</button>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Shelf Question & Setup Modal ("How many shelves do you need in your library?") -->
+  <div class="modal fade" id="shelfSetupModal" tabindex="-1" aria-labelledby="shelfSetupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content theme-modal-content rounded-4 border-0 shadow-lg">
+        
+        <div class="modal-header border-0 pb-0">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fs-2">🏛️</span>
+            <div>
+              <h2 class="modal-title h5 fw-bold mb-0" id="shelfSetupModalLabel" data-i18n="shelfSetupTitle">تنظیم قفسه‌های کتابخانه</h2>
+              <span class="small text-muted" data-i18n="shelfQuestionPrompt">پاسخ به سوال تعداد قفسه‌ها</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+
+        <div class="modal-body py-3">
+          <div class="shelf-question-banner-inside p-3 rounded-4 mb-3 text-center border">
+            <div class="fs-1 mb-2">📚</div>
+            <h3 class="h6 fw-bold mb-2 text-primary" data-i18n="shelfQuestion">چند قفسه برای کتابخانه خود نیاز دارید؟</h3>
+            <p class="text-secondary small mb-0" data-i18n="shelfSetupDesc">می‌توانید قفسه‌ها را متناسب با تعداد درس‌ها و دفترچه‌های گرامر خود تنظیم کنید. کتاب‌ها به زیبایی در قفسه‌ها چیده می‌شوند.</p>
+          </div>
+
+          <div class="mb-3 text-center">
+            <label class="form-label fw-bold small mb-2 d-block" data-i18n="selectShelfCount">تعداد قفسه‌ها را مشخص کنید:</label>
+            <div class="d-flex align-items-center justify-content-center gap-3">
+              <button type="button" class="btn btn-outline-theme rounded-circle p-2" id="shelf-decrement-btn" style="width: 42px; height: 42px;">
+                <i class="bi bi-dash-lg fs-5"></i>
+              </button>
+              <div class="shelf-count-display px-4 py-2 rounded-4 border shadow-xs">
+                <span class="fs-2 fw-bold text-primary" id="shelf-modal-number">۳</span>
+                <span class="small text-muted d-block" data-i18n="shelvesWord">قفسه چوبی / شناور</span>
+              </div>
+              <button type="button" class="btn btn-outline-theme rounded-circle p-2" id="shelf-increment-btn" style="width: 42px; height: 42px;">
+                <i class="bi bi-plus-lg fs-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick chips -->
+          <div class="d-flex justify-content-center flex-wrap gap-2 mb-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill modal-shelf-chip" data-num="2">۲ قفسه</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill modal-shelf-chip active" data-num="3">۳ قفسه (پیشنهادی)</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill modal-shelf-chip" data-num="4">۴ قفسه</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill modal-shelf-chip" data-num="5">۵ قفسه</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill modal-shelf-chip" data-num="6">۶ قفسه</button>
+          </div>
+        </div>
+
+        <div class="modal-footer border-0 pt-0 d-flex justify-content-between">
+          <button type="button" class="btn btn-light rounded-pill px-4 text-secondary" data-bs-dismiss="modal" data-i18n="cancel">انصراف</button>
+          <button type="button" id="save-shelves-btn" class="btn btn-main-add rounded-pill px-4 fw-bold">
+            <i class="bi bi-check-lg me-1"></i>
+            <span data-i18n="applyShelvesBtn">تأیید و ساخت قفسه‌ها</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Add New Lesson Modal ("Add lesson item from student") -->
+  <div class="modal fade" id="addLessonModal" tabindex="-1" aria-labelledby="addLessonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content theme-modal-content rounded-4 border-0 shadow-lg">
+        
+        <div class="modal-header border-0 pb-0">
+          <div class="d-flex align-items-center gap-2">
+            <span class="fs-2">📘</span>
+            <div>
+              <h2 class="modal-title h5 fw-bold mb-0" id="addLessonModalLabel" data-i18n="addLessonModalTitle">افزودن درس جدید دانش‌آموز</h2>
+              <span class="small text-muted" data-i18n="addLessonModalSubtitle">ساخت کتاب و دفترچه گرامر در کتابخانه</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+
+        <div class="modal-body py-3">
+          
+          <div class="mb-3">
+            <label for="lesson-student-name" class="form-label fw-bold small" data-i18n="studentNameLabel">نام دانش‌آموز:</label>
+            <input type="text" id="lesson-student-name" class="form-control rounded-pill" value="زهرا" placeholder="نام دانش‌آموز">
+          </div>
+
+          <div class="mb-3">
+            <label for="lesson-title-input" class="form-label fw-bold small" data-i18n="lessonTitleLabel">عنوان درس (فارسی یا انگلیسی):</label>
+            <input type="text" id="lesson-title-input" class="form-control rounded-pill" placeholder="مثال: درس ۵: جملات شرطی (Conditionals)">
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <label for="lesson-subject-input" class="form-label fw-bold small" data-i18n="subjectLabel">موضوع / زبان:</label>
+              <input type="text" id="lesson-subject-input" class="form-control rounded-pill" value="زبان انگلیسی">
+            </div>
+            <div class="col-md-6">
+              <label for="lesson-shelf-select" class="form-label fw-bold small" data-i18n="placeOnShelfLabel">قرارگیری در کدام قفسه؟</label>
+              <select id="lesson-shelf-select" class="form-select rounded-pill">
+                <!-- Dynamically populated according to shelfCount -->
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold small d-block" data-i18n="bookSpineColorLabel">رنگ جلد کتاب در قفسه:</label>
+            <div class="color-palette d-flex align-items-center gap-2" id="lesson-color-palette" role="radiogroup">
+              <button type="button" class="swatch modal-swatch active" data-color="blue" style="--c: #38bdf8;" title="آبی"></button>
+              <button type="button" class="swatch modal-swatch" data-color="purple" style="--c: #a78bfa;" title="بنفش"></button>
+              <button type="button" class="swatch modal-swatch" data-color="emerald" style="--c: #34d399;" title="سبز"></button>
+              <button type="button" class="swatch modal-swatch" data-color="amber" style="--c: #fbbf24;" title="طلایی"></button>
+              <button type="button" class="swatch modal-swatch" data-color="rose" style="--c: #fb7185;" title="رز"></button>
+              <button type="button" class="swatch modal-swatch" data-color="leather" style="--c: #b45309;" title="چرمی"></button>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label for="lesson-summary-input" class="form-label fw-bold small" data-i18n="lessonSummaryLabel">خلاصه مباحث درس (اختیاری):</label>
+            <textarea id="lesson-summary-input" class="form-control rounded-3" rows="2" placeholder="توضیح کوتاه در مورد مباحث این درس..."></textarea>
+          </div>
+
+        </div>
+
+        <div class="modal-footer border-0 pt-0 d-flex justify-content-between">
+          <button type="button" class="btn btn-light rounded-pill px-4 text-secondary" data-bs-dismiss="modal" data-i18n="cancel">انصراف</button>
+          <button type="button" id="submit-create-lesson-btn" class="btn btn-main-add rounded-pill px-4 fw-bold">
+            <i class="bi bi-plus-circle me-1"></i>
+            <span data-i18n="saveAndPlaceOnShelf">افزودن به قفسه کتابخانه</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Lesson Detail & Grammar Reader Modal -->
+  <div class="modal fade" id="lessonDetailModal" tabindex="-1" aria-labelledby="lessonDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content theme-modal-content rounded-4 border-0 shadow-lg">
+        
+        <div class="modal-header border-0 pb-0">
+          <div class="d-flex align-items-center gap-3">
+            <span class="fs-1" id="detail-book-icon">📖</span>
+            <div>
+              <h2 class="modal-title h5 fw-bold mb-1" id="lessonDetailModalLabel">عنوان درس</h2>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" id="detail-student-badge">🎓 زهرا</span>
+                <span class="badge bg-secondary-subtle text-secondary border rounded-pill small" id="detail-shelf-badge">قفسه ۱</span>
+                <span class="badge bg-info-subtle text-info-emphasis border rounded-pill small" id="detail-grammar-count-badge">۰ نکته گرامر</span>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+
+        <div class="modal-body py-3">
+          <!-- Lesson Info Card -->
+          <div class="p-3 rounded-4 mb-3 border bg-body-tertiary">
+            <h3 class="h6 fw-bold mb-1" data-i18n="lessonSummaryHeading">مباحث و توضیحات درس</h3>
+            <p class="text-secondary small mb-0" id="detail-lesson-summary">توضیحی ثبت نشده است.</p>
+          </div>
+
+          <!-- Grammar Notebook Section for this lesson -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h3 class="h6 fw-bold mb-0 d-flex align-items-center gap-2">
+              <span>✍️</span>
+              <span data-i18n="lessonGrammarNotebookHeading">دفترچه گرامر این درس</span>
+            </h3>
+            <button type="button" class="btn btn-sm btn-main-add rounded-pill px-3 py-1 shadow-xs" id="detail-add-grammar-btn">
+              <i class="bi bi-plus-lg me-1"></i>
+              <span class="small fw-bold" data-i18n="addGrammarToLesson">افزودن گرامر جدید</span>
+            </button>
+          </div>
+
+          <!-- Grammar Notes List -->
+          <div class="grammar-notes-list d-flex flex-column gap-3" id="detail-grammar-list">
+            <!-- Dynamic grammar cards for this lesson -->
+          </div>
+
+          <!-- Empty Grammar State -->
+          <div class="text-center p-4 rounded-4 border border-dashed d-none" id="detail-grammar-empty">
+            <div class="fs-2 mb-2">📝</div>
+            <p class="text-muted small mb-2" data-i18n="noGrammarYet">هنوز نکته گرامری برای این درس ثبت نشده است.</p>
+            <button type="button" class="btn btn-sm btn-outline-theme rounded-pill px-3" id="detail-empty-add-btn">
+              <i class="bi bi-plus-circle me-1"></i>
+              <span data-i18n="addFirstGrammar">ثبت اولین نکته گرامر</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-footer border-0 pt-0 d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-danger btn-sm rounded-pill px-3" id="detail-delete-lesson-btn">
+            <i class="bi bi-trash me-1"></i>
+            <span data-i18n="deleteLesson">حذف این درس از کتابخانه</span>
+          </button>
+          <button type="button" class="btn btn-light rounded-pill px-4 text-secondary" data-bs-dismiss="modal" data-i18n="close">بستن</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Edit Student Name Modal -->
+  <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content theme-modal-content rounded-4 border-0 shadow-lg">
+        <div class="modal-header border-0 pb-0">
+          <h2 class="modal-title h6 fw-bold mb-0" id="editStudentModalLabel" data-i18n="changeStudentName">ویرایش نام دانش‌آموز</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="بستن"></button>
+        </div>
+        <div class="modal-body py-3">
+          <label for="student-name-input-field" class="form-label fw-bold small" data-i18n="studentNameLabel">نام دانش‌آموز:</label>
+          <input type="text" id="student-name-input-field" class="form-control rounded-pill" value="زهرا">
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-main-add rounded-pill px-4 fw-bold w-100" id="save-student-name-btn" data-i18n="save">ذخیره</button>
+        </div>
       </div>
     </div>
   </div>
