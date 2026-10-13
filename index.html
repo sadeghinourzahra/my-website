@@ -1,73 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sticky Notes Board</title>
-  <meta name="description" content="Realistic bulletin board with colorful sticky notes and local storage persistence.">
-  <!-- Google Fonts: Kalam for handwriting sticky notes & Outfit for UI -->
+  <title>یادداشت‌های چسبان | Sticky Notes Board</title>
+  <meta name="description" content="تابلوی یادداشت‌های چسبان واقع‌گرایانه با تم آسمان و تور تار عنکبوتی، پشتیبانی از زبان فارسی و دسته‌بندی یادداشت‌ها.">
+  <!-- Google Fonts: Vazirmatn for Persian, Kalam for handwritten English, Outfit for modern UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Kalam:wght@400;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Fullscreen Cork Bulletin Board Container -->
-  <div class="wooden-wall">
-    <div class="cork-board" id="cork-board">
+  <!-- Fullscreen Sky Atmosphere with Geometric Web Net Background -->
+  <div class="sky-container">
+    
+    <!-- Animated Web Net Overlay & Cloud Layers -->
+    <div class="sky-web-net"></div>
+    <div class="sky-clouds-glow"></div>
+
+    <!-- Main Board Frame -->
+    <div class="board-frame">
       
-      <!-- Sleek Floating Control Bar (Can be minimized to just see notes) -->
+      <!-- Sleek Floating Control Toolbar -->
       <header class="floating-toolbar" id="toolbar" aria-label="Notes Toolbar">
+        
         <div class="toolbar-left">
-          <span class="board-badge">📌 Sticky Notes</span>
-          <span class="note-count-badge" id="note-count-badge">0 notes</span>
+          <div class="brand-badge">
+            <span class="brand-icon">📌</span>
+            <span class="brand-title" data-i18n="boardTitle">یادداشت‌های چسبان</span>
+          </div>
+          <span class="note-count-badge" id="note-count-badge">۰ یادداشت</span>
         </div>
 
-        <!-- Prompt 1: Text input and Add button -->
+        <!-- Note Input and Controls -->
         <div class="toolbar-center">
           <div class="input-container">
             <input 
               type="text" 
               id="note-input" 
-              placeholder="Write a sticky note and press Enter..." 
-              maxlength="240"
+              placeholder="یک یادداشت بنویسید و اینتر بزنید..." 
+              maxlength="260"
               autocomplete="off"
+              data-i18n-placeholder="inputPlaceholder"
             />
           </div>
 
-          <!-- Color selection dots -->
-          <div class="color-palette" title="Select color">
-            <button type="button" class="swatch active" data-color="yellow" style="--c: #fff59d;" title="Yellow"></button>
-            <button type="button" class="swatch" data-color="pink" style="--c: #ffab91;" title="Pink"></button>
-            <button type="button" class="swatch" data-color="blue" style="--c: #b3e5fc;" title="Blue"></button>
-            <button type="button" class="swatch" data-color="green" style="--c: #c8e6c9;" title="Green"></button>
-            <button type="button" class="swatch" data-color="purple" style="--c: #e1bee7;" title="Purple"></button>
-            <button type="button" class="swatch" data-color="orange" style="--c: #ffe082;" title="Orange"></button>
+          <!-- Notebook Selector for New Note -->
+          <div class="notebook-select-wrapper" title="انتخاب دفترچه">
+            <label for="notebook-select" class="sr-only">دفترچه</label>
+            <select id="notebook-select" class="notebook-dropdown">
+              <option value="todo" selected>📋 کارهای من</option>
+              <option value="remember">🧠 یادآوری‌های من</option>
+              <option value="history">📜 تاریخچه من</option>
+            </select>
           </div>
 
-          <button id="add-btn" class="add-btn" type="button" title="Add note to board">
-            <span>＋ Add</span>
+          <!-- Color selection dots -->
+          <div class="color-palette" title="انتخاب رنگ">
+            <button type="button" class="swatch active" data-color="yellow" style="--c: #fff59d;" title="زرد / Yellow"></button>
+            <button type="button" class="swatch" data-color="pink" style="--c: #ffab91;" title="صورتی / Pink"></button>
+            <button type="button" class="swatch" data-color="blue" style="--c: #b3e5fc;" title="آبی آسمانی / Sky Blue"></button>
+            <button type="button" class="swatch" data-color="green" style="--c: #c8e6c9;" title="سبز / Green"></button>
+            <button type="button" class="swatch" data-color="purple" style="--c: #e1bee7;" title="بنفش / Purple"></button>
+            <button type="button" class="swatch" data-color="orange" style="--c: #ffe082;" title="نارنجی / Orange"></button>
+          </div>
+
+          <!-- Add Note Button -->
+          <button id="add-btn" class="add-btn" type="button" title="افزودن یادداشت">
+            <span class="btn-icon">＋</span>
+            <span class="btn-text" data-i18n="addBtn">افزودن</span>
           </button>
         </div>
 
         <div class="toolbar-right">
-          <!-- Quick toggle to hide toolbar for 100% pure sticky notes view -->
-          <button id="toggle-view-btn" class="view-toggle-btn" type="button" title="Toggle Clean View (Just Notes)">
-            <span id="view-icon">👁️</span> <span class="btn-text">Just Notes</span>
+          <!-- Language Toggle Button (FA / EN) -->
+          <button id="lang-toggle-btn" class="toolbar-action-btn lang-btn" type="button" title="تغییر زبان / Switch Language">
+            <span class="btn-icon">🌐</span>
+            <span id="lang-label" class="btn-text">English</span>
+          </button>
+
+          <!-- Toggle View Button (Just Notes) -->
+          <button id="toggle-view-btn" class="toolbar-action-btn view-toggle-btn" type="button" title="نمای تمیز (فقط یادداشت‌ها)">
+            <span id="view-icon">👁️</span>
+            <span class="btn-text" data-i18n="justNotes">فقط یادداشت‌ها</span>
           </button>
         </div>
+
       </header>
 
-      <!-- Prompt 1: Grid layout to display notes as colorful squares -->
+      <!-- Notebook Categories Tabs Navigation Bar -->
+      <nav class="notebook-tabs-bar" aria-label="Notebook Filters">
+        <div class="tabs-container">
+          <button type="button" class="tab-btn active" data-notebook="all">
+            <span class="tab-icon">✨</span>
+            <span class="tab-text" data-i18n="tabAll">همه یادداشت‌ها</span>
+            <span class="tab-count" id="count-all">0</span>
+          </button>
+
+          <button type="button" class="tab-btn" data-notebook="todo">
+            <span class="tab-icon">📋</span>
+            <span class="tab-text" data-i18n="tabTodo">کارهای من</span>
+            <span class="tab-count" id="count-todo">0</span>
+          </button>
+
+          <button type="button" class="tab-btn" data-notebook="remember">
+            <span class="tab-icon">🧠</span>
+            <span class="tab-text" data-i18n="tabRemember">یادآوری‌های من</span>
+            <span class="tab-count" id="count-remember">0</span>
+          </button>
+
+          <button type="button" class="tab-btn" data-notebook="history">
+            <span class="tab-icon">📜</span>
+            <span class="tab-text" data-i18n="tabHistory">تاریخچه من</span>
+            <span class="tab-count" id="count-history">0</span>
+          </button>
+        </div>
+
+        <!-- Filter info status text -->
+        <div class="active-filter-indicator" id="filter-indicator">
+          <span class="indicator-dot"></span>
+          <span id="filter-text">نمایش تمام یادداشت‌ها</span>
+        </div>
+      </nav>
+
+      <!-- Sticky Notes Board Canvas Area -->
       <main class="board-canvas">
         <div class="notes-grid" id="notes-grid">
-          <!-- Sticky notes injected here by JavaScript on page open -->
+          <!-- Dynamic sticky notes injected by app.js -->
+        </div>
+
+        <!-- Empty state placeholder when notebook has no notes -->
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon">☁️</div>
+          <h3 class="empty-title" data-i18n="emptyTitle">هیچ یادداشتی در این بخش نیست!</h3>
+          <p class="empty-desc" data-i18n="emptyDesc">یک یادداشت جدید بنویسید یا یادداشتی را به این دفترچه منتقل کنید.</p>
         </div>
       </main>
 
     </div>
   </div>
 
+  <!-- Notebook Selection Modal (appears when user clicks Finish / Move) -->
+  <div class="modal-overlay hidden" id="notebook-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-icon">🎉</span>
+          <h3 class="modal-title" data-i18n="modalTitle">تکمیل و انتقال به دفترچه</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="modal-close-btn">&times;</button>
+      </div>
+      <p class="modal-desc" data-i18n="modalDesc">تبریک! یادداشت تکمیل شد. می‌خواهید در کدام دفترچه ذخیره شود؟</p>
+
+      <div class="notebook-choice-list">
+        <button type="button" class="choice-item" data-choice="history">
+          <span class="choice-icon">📜</span>
+          <div class="choice-info">
+            <strong class="choice-name" data-i18n="tabHistory">تاریخچه من</strong>
+            <span class="choice-hint" data-i18n="historyHint">ثبت در تاریخچه و آرشیو کارهای انجام‌شده</span>
+          </div>
+          <span class="choice-badge" data-i18n="recommended">پیشنهادی</span>
+        </button>
+
+        <button type="button" class="choice-item" data-choice="remember">
+          <span class="choice-icon">🧠</span>
+          <div class="choice-info">
+            <strong class="choice-name" data-i18n="tabRemember">یادآوری‌های من</strong>
+            <span class="choice-hint" data-i18n="rememberHint">نگه‌داری به عنوان نکته یا یادآوری مهم</span>
+          </div>
+        </button>
+
+        <button type="button" class="choice-item" data-choice="todo">
+          <span class="choice-icon">📋</span>
+          <div class="choice-info">
+            <strong class="choice-name" data-i18n="tabTodo">کارهای من</strong>
+            <span class="choice-hint" data-i18n="todoHint">نگه‌داری در لیست کارهای روزانه</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" id="modal-cancel-btn" data-i18n="cancel">انصراف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio elements generated dynamically via Web Audio API -->
   <script src="app.js"></script>
 </body>
 </html>
