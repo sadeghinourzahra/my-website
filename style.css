@@ -824,6 +824,137 @@ html[data-bg-theme="black"] .choice-item:hover {
   box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.4);
 }
 
+/* Note Emoji Badge & Floating Inline Picker */
+.note-emoji-badge {
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+}
+
+html[data-bg-theme="black"] .note-emoji-badge {
+  background: rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.note-emoji-badge:hover {
+  transform: scale(1.35) rotate(-6deg);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Floating Inline Emoji Picker Popover */
+.inline-emoji-picker-popover {
+  position: absolute;
+  top: 44px;
+  right: 12px;
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--toolbar-border);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  z-index: 100;
+  animation: popInEmoji 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[dir="ltr"] .inline-emoji-picker-popover {
+  right: auto;
+  left: 12px;
+}
+
+@keyframes popInEmoji {
+  from { opacity: 0; transform: scale(0.7) translateY(-8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.inline-emoji-btn {
+  font-size: 1.3rem;
+  border: none;
+  background: transparent;
+  padding: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-emoji-btn:hover {
+  transform: scale(1.3);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+html[data-bg-theme="black"] .inline-emoji-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Modal Emoji Palette */
+.modal-emoji-chip {
+  font-size: 1.25rem;
+  border: 2px solid transparent;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  user-select: none;
+}
+
+html[data-bg-theme="black"] .modal-emoji-chip {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-emoji-chip:hover {
+  transform: scale(1.22);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.modal-emoji-chip.active {
+  background: rgba(2, 132, 199, 0.18) !important;
+  border-color: #0284c7 !important;
+  transform: scale(1.2);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+/* Textarea Quick Emoji Bar */
+.textarea-quick-emoji-bar {
+  user-select: none;
+}
+
+.btn-quick-emoji {
+  font-size: 1.05rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 2px 7px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+html[data-bg-theme="black"] .btn-quick-emoji {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn-quick-emoji:hover {
+  transform: scale(1.25);
+  background: rgba(0, 0, 0, 0.08);
+}
+
 /* Toast Styling */
 .theme-toast {
   background: var(--toolbar-bg);
@@ -1634,5 +1765,487 @@ button:active,
     font-size: 0.68rem;
   }
 }
+
+/* ==========================================================================
+   Timeline & Daily Plans Reflection Rating System
+   ========================================================================== */
+
+.timeline-header-card,
+.daily-review-card {
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--toolbar-border);
+  color: var(--toolbar-text);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-filter-btn.active {
+  background: var(--pill-active-bg) !important;
+  color: var(--pill-active-text) !important;
+  font-weight: bold;
+}
+
+/* Score 1 to 10 rating chips */
+.score-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html[data-bg-theme="black"] .score-btn {
+  background: #1e293b;
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.score-btn:hover {
+  transform: scale(1.18);
+  border-color: #0284c7;
+  color: #0284c7;
+}
+
+.score-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+  transform: scale(1.25);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+}
+
+/* Vertical Timeline Flow */
+.timeline-flow {
+  position: relative;
+  padding-inline-start: 28px;
+  border-inline-start: 3px solid rgba(2, 132, 199, 0.25);
+  margin-inline-start: 16px;
+}
+
+html[data-bg-theme="black"] .timeline-flow {
+  border-inline-start-color: rgba(56, 189, 248, 0.25);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.timeline-node-icon {
+  position: absolute;
+  top: 14px;
+  inset-inline-start: -42px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+  background: #ffffff;
+  border: 2px solid #0284c7;
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.35);
+  z-index: 2;
+}
+
+.timeline-item.is-finished .timeline-node-icon {
+  background: #10b981;
+  border-color: #059669;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+}
+
+.timeline-item.is-pending .timeline-node-icon {
+  background: #f59e0b;
+  border-color: #d97706;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+.timeline-card {
+  background: var(--toolbar-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--toolbar-border);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-card.finished-card {
+  border-inline-start: 4px solid #10b981;
+}
+
+.timeline-card.pending-card {
+  border-inline-start: 4px solid #f59e0b;
+}
+
+/* Past Reflections Log */
+.past-review-item {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+}
+
+html[data-bg-theme="black"] .past-review-item {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+
+/* ==========================================================================
+   Activity Quality & Daily Plans Reflection Box (Medals & Smart Ideas)
+   ========================================================================== */
+
+.activity-quality-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(2, 132, 199, 0.22);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Theme variations for Activity Quality Box */
+html[data-bg-theme="sky"] .activity-quality-card {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(2, 132, 199, 0.25);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.12);
+}
+
+html[data-bg-theme="white"] .activity-quality-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+}
+
+html[data-bg-theme="cream"] .activity-quality-card {
+  background: rgba(253, 248, 237, 0.94);
+  border-color: rgba(217, 119, 6, 0.22);
+  box-shadow: 0 10px 28px rgba(180, 83, 9, 0.08);
+}
+
+html[data-bg-theme="black"] .activity-quality-card {
+  background: rgba(15, 23, 42, 0.88);
+  border-color: rgba(56, 189, 248, 0.28);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  color: #f1f5f9;
+}
+
+html[data-bg-theme="black"] .activity-quality-card .text-dark,
+html[data-bg-theme="black"] .activity-quality-card .h5,
+html[data-bg-theme="black"] .activity-quality-card .h6 {
+  color: #f8fafc !important;
+}
+
+html[data-bg-theme="black"] .activity-quality-card .text-secondary {
+  color: #94a3b8 !important;
+}
+
+html[data-bg-theme="black"] .quality-question-box {
+  background: rgba(30, 41, 59, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-bg-theme="black"] .obstacle-selector-section,
+html[data-bg-theme="black"] .smart-ideas-box,
+html[data-bg-theme="black"] .medal-hero-card {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+}
+
+html[data-bg-theme="black"] .stat-mini-card {
+  background: rgba(30, 41, 59, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f8fafc !important;
+}
+
+html[data-bg-theme="black"] #quality-yes-panel {
+  background: rgba(6, 78, 59, 0.28) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+html[data-bg-theme="black"] #quality-no-panel {
+  background: rgba(120, 53, 15, 0.25) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+html[data-bg-theme="black"] .smart-idea-item {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-color: rgba(56, 189, 248, 0.2) !important;
+  color: #f1f5f9 !important;
+}
+
+.quality-card-icon-badge {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(14, 165, 233, 0.25));
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  line-height: 1;
+}
+
+/* Gradient Buttons for Choices */
+.btn-success-gradient {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-success-gradient:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+.btn-warning-gradient {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-warning-gradient:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+}
+
+.quality-choice-btn {
+  text-align: start;
+  min-width: 250px;
+  cursor: pointer;
+}
+
+.quality-choice-btn .choice-title {
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.quality-choice-btn .choice-sub {
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+/* Medal Hero Celebration Card */
+.medal-hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  position: relative;
+}
+
+.medal-glow-aura {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.38) 0%, rgba(251, 191, 36, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: auraPulse 3s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0%, 100% { transform: translateX(-50%) scale(0.95); opacity: 0.75; }
+  50% { transform: translateX(-50%) scale(1.15); opacity: 1; }
+}
+
+.medal-animation-wrapper {
+  z-index: 1;
+}
+
+.medal-shine-stars {
+  font-size: 1.2rem;
+  letter-spacing: 6px;
+  animation: sparkleTwinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes sparkleTwinkle {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px #f59e0b); }
+}
+
+.medal-3d-graphic {
+  filter: drop-shadow(0 12px 24px rgba(234, 179, 8, 0.45));
+  animation: medalFloat 3.2s ease-in-out infinite;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.medal-3d-graphic:hover {
+  transform: scale(1.2) rotate(6deg);
+}
+
+@keyframes medalFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.medal-bounce {
+  animation: popupMedalBounce 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popupMedalBounce {
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.25) rotate(8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.sparkles-anim {
+  font-size: 1.4rem;
+  animation: sparkleRotate 4s linear infinite;
+}
+
+@keyframes sparkleRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Obstacle Selection Chips */
+.obstacle-chip {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.obstacle-chip:hover {
+  background: rgba(2, 132, 199, 0.08);
+  border-color: rgba(2, 132, 199, 0.3);
+  transform: translateY(-2px);
+}
+
+.obstacle-chip.active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+}
+
+html[data-bg-theme="black"] .obstacle-chip {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+html[data-bg-theme="black"] .obstacle-chip.active {
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+  border-color: #38bdf8 !important;
+  font-weight: 700;
+}
+
+/* Smart Idea Cards */
+.smart-idea-item {
+  background: rgba(248, 250, 252, 0.85);
+  border: 1px solid rgba(2, 132, 199, 0.18);
+  border-radius: 16px;
+  padding: 14px 16px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.smart-idea-item:hover {
+  background: #ffffff;
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.12);
+  transform: translateY(-2px);
+}
+
+.smart-idea-item .idea-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.smart-idea-item .idea-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.smart-idea-item .idea-desc {
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+html[data-bg-theme="black"] .smart-idea-item .idea-desc {
+  color: #94a3b8;
+}
+
+.smart-idea-item .idea-pin-btn {
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+/* Confetti Fullscreen Overlay */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+/* Past Quality Reflection Item */
+.past-quality-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease;
+}
+
+.past-quality-card:hover {
+  transform: translateX(-3px);
+}
+
+html[data-bg-theme="black"] .past-quality-card {
+  background: rgba(30, 41, 59, 0.75);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+
+.max-w-600 {
+  max-width: 600px;
+}
+
+
 
 
